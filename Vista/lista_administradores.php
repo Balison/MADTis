@@ -296,24 +296,15 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'administrador'");
 
                                 while($fila = mysql_fetch_array($peticion))
                                 {
-                                    if($fila['NOMBRE_U'] == $uActivo || $fila['NOMBRE_U']==$uActivo)
+                                    if($fila['NOMBRE_U'] != $uActivo)
                                     {
-
-
-
-                                     }
-                                    else{    
-
-                                            if($uActivo==$uActivo)
-                                            {
-
+                                        ?>
+                                            <div class="contenedor-fila">
+                                                <div class="contenedor-columna">
+                                                    <?php
+                                                        echo $fila['NOMBRE_U'];
                                                     ?>
-                                                 <div class="contenedor-fila">
-                                                         <div class="contenedor-columna">
-                                                            <?php
-                                                                echo $fila['NOMBRE_U'];
-                                                            ?>
-                                                        </div>
+                                                </div>
                                     
                                                 <div class="contenedor-columna">
                                                      <?php
@@ -350,73 +341,14 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'administrador'");
                                                             echo "<a href ='eliminar_administrador.php?id_us=".$fila['NOMBRE_U']."' class='verificar'><font color='blue'>Eliminar</font></a>";
                                                          ?>
                                                 </div>
-                                                    <?php
-
-                                            }
-                          
-                                else{
-
-                                        ?>
-                                            <div class="contenedor-fila">
-                                                         <div class="contenedor-columna">
-                                                            <?php
-                                                                echo $fila['NOMBRE_U'];
-                                                            ?>
-                                                        </div>
-                                    
-                                                <div class="contenedor-columna">
-                                                     <?php
-                                                        echo $fila['ESTADO_E'];
-                                                     ?>
-                                                </div>
-            
-                                                <div class="contenedor-columna">
-                                                    <?php
-                                                        echo $fila['PASSWORD_U'];
-                                                     ?>
-                                                </div>
-                                    
-                                                <div class="contenedor-columna">
-                                                    <?php
-                                                         echo $fila['TELEFONO_U'];
-                                                     ?>
-                                                 </div>
-                                    
-                                                <div class="contenedor-columna">
-                                                     <?php
-                                                         echo $fila['CORREO_ELECTRONICO_U'];
-                                                    ?>
-                                                </div>
-                                                <div class="contenedor-columna">
-                                                     <?php
-                                                         echo $fila['ROL_R'];
-                                                     ?>
-                                                </div>  
-                                     
-                                    
-                                              
-
-
-
-                                        <?php
-
-
-
-
-
+                                            </div>
+                                            <?php    
+                                    }
                                 }
-                            }
-
-
-
-
-                                }
-
                                 //Cerrar
-                         
                         ?>  
                                                            
-                                                      </div>                                         
+                        </div>                                         
                     
                     </div>                    
                     
