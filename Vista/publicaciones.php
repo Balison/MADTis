@@ -289,22 +289,26 @@
                                                     WHERE r.NOMBRE_U = '$uActivo' AND r.TIPO_T = 'publicaciones' AND r.ID_R=ds.ID_R AND d.ID_R = r.ID_R"); 
 
                                             while ($Desc = mysql_fetch_row($Sel_Desc)) {
-
-                                                if(!empty($Desc[0]))
-                                                {
                                                    
                                                 echo   '<tr>
                                                             <td>'.$indice.'</td>
                                                             
-                                                            <td>
-                                                                <a class="link-dos" target="_blank" href='.$Desc[0].' onclick="">'.$Desc[1].'<span class="instancename">    
-                                                                <span class="accesshide "></span></a>
+                                                            <td>';
+
+                                                if(!empty($Desc[0]))
+                                                {
+                                                    echo        '<a class="link-dos" target="_blank" href="'.$Desc[0].'" onclick="">'.$Desc[1].'<span class="instancename">' ; 
+                                                } else {
+                                                    echo        $Desc[1];
+                                                }
+                                                
+                                                echo            '<span class="accesshide "></span></a>
                                                             </td>
 
                                                             <td>'.$Desc[2].'</td>
                                                             <td><a class="link-dos" href="../Vista/eliminar_publicacion.php?id_us='.$Desc[1].'">Eliminar</a></td>
                                                         </tr>';
-                                                    }
+                                            
 
                                                 $indice++;
                                             }
