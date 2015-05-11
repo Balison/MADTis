@@ -36,6 +36,7 @@
                     $_SESSION['usuario'] = $usuario;
                     $_SESSION['contrasena'] = $contrasena;
                     $_SESSION['administrador'] = $permisosenbase;
+                    $_SESSION['tipoUsuario'] = $permisosenbase;
                     $peticion1 = $conectar->consulta("INSERT INTO `sesion` (`ID_S`, `NOMBRE_U`, `FECHA_S`, `HORA_S`, `IP_S`)" . " VALUES (NULL, '$usuario', '$fecha', '$hora', '$ip');");
                     echo'<html><head><meta http-equiv="REFRESH" content="0;url=principal.php"></head></html>';
                   
@@ -47,6 +48,7 @@
                             $_SESSION['usuario'] = $usuario;
                             $_SESSION['contrasena'] = $contrasena;
                             $_SESSION['asesor'] = $permisosenbase;
+                            $_SESSION['tipoUsuario'] = $permisosenbase;
                             $peticion1 = $conectar->consulta("INSERT INTO `sesion` (`ID_S`, `NOMBRE_U`, `FECHA_S`, `HORA_S`, `IP_S`)" . " VALUES (NULL, '$usuario', '$fecha', '$hora', '$ip');");
                             echo'<html><head><meta http-equiv="REFRESH" content="0;url=inicio_asesor.php"></head></html>';
                         
@@ -58,6 +60,7 @@
                             $_SESSION['usuario'] = $usuario;
                             $_SESSION['contrasena'] = $contrasena;
                             $_SESSION['grupoEmpresa'] = $permisosenbase;
+                            $_SESSION['tipoUsuario'] = $permisosenbase;
                             $peticion1 = $conectar->consulta("INSERT INTO `sesion` (`ID_S`, `NOMBRE_U`, `FECHA_S`, `HORA_S`, `IP_S`)" . " VALUES (NULL, '$usuario', '$fecha', '$hora', '$ip');");
                             echo'<html><head><meta http-equiv="REFRESH" content="0;url=inicio_grupo_empresa.php"></head></html>';
                             
