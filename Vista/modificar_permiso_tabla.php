@@ -2,6 +2,9 @@
 
 session_start();
 
+require_once("../Controlador/validacionDeAcceso.php");
+validar_permisos('administrador');
+
 //Crear variables--------------------------
 
 $usuario = $_SESSION['usuario'];

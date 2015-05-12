@@ -1,6 +1,9 @@
- <?php  
- include '../Modelo/conexion.php';
+<?php  
  session_start();
+ require_once("../Controlador/validacionDeAcceso.php");
+ validar_permisos('asesor');
+ include '../Modelo/conexion.php';
+ 
  $uActivo = $_SESSION['usuario'];
  $con = new conexion();
  ?> 

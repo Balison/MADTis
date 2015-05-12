@@ -1,10 +1,10 @@
-
-
 <?php
-
+	session_start();
+	require_once("../Controlador/validacionDeAcceso.php");
+	validar_permisos('asesor');
 	require_once '../Modelo/conexion.php';
 	require_once '../Modelo/Model/GrupoEmpresa.php';   
-	session_start();
+	
 	$usuario = $_SESSION['usuario'];
      
 	$conexion = new conexion();

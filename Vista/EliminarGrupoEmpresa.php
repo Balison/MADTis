@@ -1,5 +1,9 @@
 <?php  
 
+session_start();
+require_once("../Controlador/validacionDeAcceso.php");
+validar_permisos('administrador');
+
 include '../Modelo/conexion.php';
 $conect = new conexion();
 $GrupoE = $_GET['id_us'];

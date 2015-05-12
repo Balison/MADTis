@@ -1,8 +1,10 @@
 <?php
+session_start();
+require_once("validacionDeAcceso.php");
+validar_permisos('asesor');
 
 include '../Modelo/conexion_pd.php';
 include '../Modelo/crear_oc_pdf.php';
-session_start();
 
 $conexion = new conexion();
 

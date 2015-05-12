@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    require_once("validacionDeAcceso.php");
+    validar_permisos('asesor');
+?>
 <html>
     
     <head>
@@ -10,7 +15,6 @@
 
 include '../Modelo/conexion_pd.php';
 include '../Modelo/crear_oc_pdf.php';
-session_start();
 $conexion = new conexion();
 
 $nombreUA = $_SESSION['usuario'] ;
