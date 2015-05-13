@@ -1,7 +1,10 @@
 <?php
 
-include '../Modelo/conexion.php';
 session_start();
+
+require_once("../Controlador/validacionDeAcceso.php");
+validar_permisos('grupoEmpresa'); 
+include '../Modelo/conexion.php';
 $conect = new conexion();
 $nombreU = $_SESSION['usuario'];
 

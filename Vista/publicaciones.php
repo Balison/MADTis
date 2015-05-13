@@ -1,7 +1,11 @@
  <?php  
   session_start();
-  $uActivo = $_SESSION['usuario'];
+  require_once("../Controlador/validacionDeAcceso.php");
+  validar_permisos('asesor');
+
   include '../Modelo/conexion.php';
+
+  $uActivo = $_SESSION['usuario'];
   $con=new conexion();
  ?> 
 

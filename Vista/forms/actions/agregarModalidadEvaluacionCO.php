@@ -1,5 +1,11 @@
 <?php
+
+session_start();
+
+require_once("validacionDeAcceso.php");
+validar_permisos('asesor');  
 include '../../../Modelo/conexion.php';
+
 //header('Location: ../../CrearModalidadEvaluacion.php');
 $textDescripcionD=$_POST["descripcionDocumento"];
 
@@ -9,7 +15,6 @@ $idCrit=1;
 $idReg=1;
 
 $existeCampo="vacio";
-session_start();
 $usuarioActivo=$_SESSION['usuario'];
 
 

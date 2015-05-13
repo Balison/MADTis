@@ -1,7 +1,8 @@
 <?php
 
 $Form = $_POST['EscogidoEliminar'];
-
+require_once("../Controlador/validacionDeAcceso.php");
+validar_permisos('asesor');
 
 include '../Modelo/conexion.php';
 

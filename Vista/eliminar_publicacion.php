@@ -1,6 +1,8 @@
 <?php
  
 session_start();
+require_once("../Controlador/validacionDeAcceso.php");
+validar_permisos('asesor');
 include '../Modelo/conexion.php';
 $conect = new conexion();
 
