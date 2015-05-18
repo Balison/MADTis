@@ -15,7 +15,10 @@
 
 	function validar_permisos($tipo_usuario = 'publico'){
 		if ($_SESSION['tipoUsuario'] != $tipo_usuario){
-			header("Location: ../error/sitio_no_encontrado.html");
+			header("HTTP/1.1 403 Unauthorized");
+			
+			include('../403.html');
+			exit;
 		}
 	}
 ?>
