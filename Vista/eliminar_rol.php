@@ -1,7 +1,11 @@
 <?php
     include '../Modelo/conexion.php';
-    $conectar = new conexion();
+
     session_start();
+    require_once("../Controlador/validacionDeAcceso.php");
+    validar_permisos('administrador');
+
+    $conectar = new conexion();
 
 
 $usuario= $_SESSION['usuario'];

@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+require_once("../../../Controlador/validacionDeAcceso.php");
+validar_permisos('asesor');
+
 error_reporting (5); 	
 include '../../../Modelo/conexion.php';
 

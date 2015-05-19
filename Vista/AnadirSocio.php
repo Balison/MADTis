@@ -1,10 +1,11 @@
-
-
 <!DOCTYPE html>
 <?php
+ 
+ session_start();
+ require_once("../Controlador/validacionDeAcceso.php");
+ validar_permisos('grupoEmpresa');  
 
  include '../Modelo/conexion.php';
- session_start();
  $uActivo = $_SESSION['usuario'];
  $conexion = new conexion();
  
