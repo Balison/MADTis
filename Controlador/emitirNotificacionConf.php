@@ -3,6 +3,8 @@ session_start();
 require_once("validacionDeAcceso.php");
 validar_permisos('asesor');
 
+$oldmask = umask(0);
+
 include '../Modelo/conexion_pd.php';
 include '../Modelo/crear_oc_pdf.php';
 
@@ -155,9 +157,9 @@ if (isset($_POST['lista']))
 
                                    if (!file_exists($rutaD)) 
                                     {
-                                        $oldmask = umask(0); 
+                                       // $oldmask = umask(0); 
                                         mkdir($rutaD, 0777,TRUE);
-                                        umask($oldmask);
+                                       // umask($oldmask);
                                         chown($rutaD, "bittle2014"); 
                                         chgrp($rutaD, "webtis");
 
@@ -238,4 +240,5 @@ if (isset($_POST['lista']))
 	    }
     }
 }
+umask($oldmask);
 ?>

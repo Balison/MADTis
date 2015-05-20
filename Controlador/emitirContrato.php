@@ -4,7 +4,7 @@
   validar_permisos('asesor');  
   include '../Modelo/conexion.php';
   $conexion = new conexion();
-
+  $oldmask = umask(0);
   if (isset($_POST['grupoempresa']))
   {
       $nLargoGE = $_REQUEST['grupoempresa'];
@@ -111,9 +111,9 @@
                     
                     if (!file_exists($rutaDir)) 
                     {
-                        $oldmask = umask(0); 
+//                        $oldmask = umask(0); 
                         mkdir($rutaDir, 0777,TRUE);
-                        umask($oldmask);
+//                        umask($oldmask);
                         
                         if(!file_exists("../".$nombreUA."/index.html"))
                         {
@@ -179,4 +179,5 @@
         
       }
   }
+umask ($oldmask);
 ?>

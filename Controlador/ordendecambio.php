@@ -2,6 +2,7 @@
     session_start();
     require_once("validacionDeAcceso.php");
     validar_permisos('asesor');
+    $oldmask = umask(0);
 ?>
 <html>
     
@@ -194,9 +195,9 @@ if (isset($_POST['lista']))
 
                                     if (!file_exists($rutaD)) 
                                     {
-                                        $oldmask = umask(0); 
+//                                        $oldmask = umask(0); 
                                         mkdir($rutaD, 0777,TRUE);
-                                        umask($oldmask);
+//                                        umask($oldmask);
                                         if(!file_exists("../".$nombreUGE."/index.html"))
                                         {
                                             fopen("../".$nombreUGE."/index.html", "x");
@@ -300,4 +301,5 @@ if (isset($_POST['lista']))
     }
 }
 
+umask($oldmask);
 ?>

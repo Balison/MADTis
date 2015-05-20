@@ -9,6 +9,7 @@ $clas = new conexion();
 
     if(!file_exists($rutaDirectorio))
     {
+	$oldmask = umask(0);
         mkdir($rutaDirectorio, 0777);
 
         if(!file_exists("../Repositorio/".$UsuarioActivo."/index.html"))
@@ -16,6 +17,7 @@ $clas = new conexion();
             $directorioIndex = "../Repositorio/".$UsuarioActivo."/index.html";
             fopen($directorioIndex, "x");
         }
+	umask($oldmask);
     }
     
     $ruta = "$rutaDirectorio/" . $_FILES['archivoA']['name'];
@@ -24,7 +26,6 @@ $clas = new conexion();
             try{
             $resultado = move_uploaded_file($_FILES['archivoA']['tmp_name'], $ruta);
             if ($resultado) {
-                
                 //recuperamos la idRegistro siguiente que se insertara en la BD de registro para enviarlo a documento
                 //$resultadoUno=$clas->consulta("SELECT auto_increment FROM `information_schema`.tables WHERE TABLE_SCHEMA = 'tis_mbittle' AND TABLE_NAME = 'registro'");
                 $resultadoUno=$clas->consulta("SELECT auto_increment FROM `information_schema`.tables WHERE TABLE_SCHEMA = 'saetis' AND TABLE_NAME = 'registro'");
