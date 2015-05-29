@@ -16,8 +16,8 @@
 	function validar_permisos($tipo_usuario = 'publico'){
 		if ($_SESSION['tipoUsuario'] != $tipo_usuario){
 			header("HTTP/1.1 403 Unauthorized");
-			
-			include('../403.html');
+			include('../403.php');
+			display_error($_SESSION['tipoUsuario']);
 			exit;
 		}
 	}

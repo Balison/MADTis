@@ -1,24 +1,22 @@
 <?php
   session_start();
-  require_once("validacionDeAcceso.php");
-  validar_permisos('asesor');  
-  include '../Modelo/conexion.php';
+//  exec("pdflatex test/debug.tex", $final); 
+//exec("cat test/debug.tex", $final);
+  include 'Modelo/conexion.php';
   $conexion = new conexion();
   $oldmask = umask(0);
-  if (isset($_POST['grupoempresa']))
+  if (true)
   {
-      $nLargoGE = $_REQUEST['grupoempresa'];
+      $nLargoGE = "Innovando Tecnologia SRL";
+echo "generando para $nLargoGE<br>";
       $consulta="SELECT DISTINCT NOMBRE_R FROM `registro` AS r,`receptor` AS w WHERE  r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'Contrato' AND w.`RECEPTOR_R` = '$nLargoGE'";
       $contrato= $conexion->consulta($consulta);
       $cantC= mysql_num_rows($contrato);  
       
-      if($cantC != 0 )
+      if(true)
       {
-         echo"<script type=\"text/javascript\">alert('Usted ya emitio un contrato para esta grupo empresa'); window.location='../Vista/contrato.php';</script>";  
-      }
-      else
-      {
-         $nombreF= '../Repositorio/asesor/Contrato.tex';
+//	echo "Holaaa<br>";
+         $nombreF= 'Repositorio/asesor/Contrato.tex';
          $existeFile = FALSE;
          if (file_exists($nombreF))
          {
@@ -26,6 +24,7 @@
          }
          if($existeFile)
          {
+//echo "Existe!<br>";
             if(strnatcasecmp($nLargoGE, "Seleccione una grupo empresa") != 0)
             {
                 $seleccion="SELECT `NOMBRE_CORTO_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nLargoGE'";            
@@ -73,14 +72,14 @@
                     $remplazo['empresa_nombre_corto'] = $nCortoGE[0];
                     $remplazo['rep_legal']            = $represen[0];
                     $remplazo['asesor']               = $asesor;
-                    $remplazo['fecha_actual']         = date('Y/m/d');
+                    $remplazo['fecha_actual']         = "27/03/2015";
                     $remplazo['sistema']              = $sistema[0];
                     $remplazo['convocatoria']         = $convo[0];
                         
-                    $ruta = "../test/";
-                    
+                    $ruta = "test/";
+  //                  echo "on $ruta<br>";
                     chdir($ruta);
-                        
+    //                exec("ls -l", $final);
                     $id = "Contrato";
                     $tex = $id.".tex"; 
                     $log = $id.".log"; 
@@ -100,8 +99,14 @@
                     $texto = str_replace($buscar['convocatoria'], $remplazo['convocatoria'], $texto);
                         
                     file_put_contents($tex,$texto);
-
-                    exec("pdflatex -interaction=nonstopmode $tex",$final);
+//file_put_contents("debug.tex", $texto);
+//echo "executing: $tex";
+//exec("cat $tex", $final);
+//echo "<br> $texto <br>";
+                    exec("pdflatex $tex", $final);
+echo "<br>";
+foreach ($final as $line)
+echo $line."<br>";
                     file_put_contents($tex, $textoAux);
                     unlink($log);
                     unlink($aux);
@@ -129,8 +134,7 @@
                     $hora = date("G:H:i");
                     $visible = "1";
                     $descargar = "1";
-                    $comentar = $conexion->consulta("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','Contrato','Habilitado','$pdf','$fecha','$hora')")or
-                    die("Error");
+
                                                    
                     $consultar= $conexion->consulta("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
                     
@@ -139,16 +143,16 @@
                         $idRegis = trim($regis[0]);
                     }
                                                    
-                    $guardar = $conexion->consulta("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$idRegis','1024','$descrip','$visible','$descargar')");
-                    $desD = $conexion->consulta("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$idRegis','Contrato')");
-                    $destinat = $conexion->consulta("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$idRegis','$nLargoGE')");
+//                    $guardar = $conexion->consulta("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$idRegis','1024','$descrip','$visible','$descargar')");
+  //                  $desD = $conexion->consulta("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$idRegis','Contrato')");
+    //                $destinat = $conexion->consulta("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$idRegis','$nLargoGE')");
                      
                      $selGE=$conexion->consulta("SELECT `NOMBRE_U` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nLargoGE'");
                      $nomGE=mysql_fetch_array($selGE);
 
-                     $estaFir=  $conexion->consulta("UPDATE `inscripcion_proyecto`
-                     SET `ESTADO_CONTRATO`= 'Firmado'                   
-                    WHERE `NOMBRE_U` = '$nomGE[0]'");  
+      //               $estaFir=  $conexion->consulta("UPDATE `inscripcion_proyecto`
+        //             SET `ESTADO_CONTRATO`= 'Firmado'                   
+          //          WHERE `NOMBRE_U` = '$nomGE[0]'");  
                     //rename("Contrato.pdf", $pdf);
 
                    /* if(!file_exists("../".$nombreUA."/Contratos/index.html"))
@@ -157,7 +161,7 @@
                         fopen($directorioIndex, "x");
                     }*/
                     
-                    echo"<script type=\"text/javascript\">alert('Se genero el contrato correctamente'); window.location='../Vista/contrato.php';</script>";                    
+//                    echo"<script type=\"text/javascript\">alert('Se genero el contrato correctamente'); window.location='../Vista/contrato.php';</script>";                    
                 }
                 else
                 {

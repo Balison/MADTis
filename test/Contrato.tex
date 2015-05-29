@@ -3,19 +3,19 @@
 %% MLBC   270306
 
 %% datos del objeto del contrato
-\newcommand{\sistema}[0]{Implantacion SAETIS}
-\newcommand{\convocatoria}[0]{CPETIS2015}
-\newcommand{\fecha}[0]{2015/05/27}
+\newcommand{\sistema}[0]{[[sistema]]}
+\newcommand{\convocatoria}[0]{[[convocatoria]]}
+\newcommand{\fecha}[0]{[[fecha-actual]]}
 
 %% datos de la empresa con la que se hace el contrato
 
-\newcommand{\empresa}[0]{\textbf{MAD}}
-\newcommand{\empresaL}[0]{\textbf{MAD SOFTWARE S.R.L.}}
-\newcommand{\representante}[0]{Juan Manuel Castro Arnez}
+\newcommand{\empresa}[0]{\textbf{[[empresa-nombre-largo]]}}
+\newcommand{\empresaL}[0]{\textbf{[[empresa-nombre-corto]]}}
+\newcommand{\representante}[0]{[[rep-legal]]}
 
 %% nombre del asesor
 
-%\newcommand{\asesor}[0]{Maria Leticia Blanco Coca}
+\newcommand{\asesor}[0]{[[asesor]]}
 
 \usepackage[spanish, activeacute]{babel}
 %\usepackage[light]{draftcopy}
@@ -26,7 +26,7 @@
 
 \begin{document}
 \title{\bf{CONTRATO DE PRESTACI\'ON DE SERVICIOS - CONSULTOR\'IA}}
-\date{\today}
+\date \today
 
 \maketitle
 
@@ -52,22 +52,14 @@ Que suscriben la empresa Taller de Ingenier'ia de Software - TIS, que en lo suce
 \\
 {\bf{DECIMO.-}} TIS representada por su directorio Lic. Corina Flores V., Lic. M. Leticia Blanco C., Lic. David Escalera F., Lic. Patricia Rodriguez e Ing. Americo Fiorilo, y por otra la consultora \empresa,  representada por su representante legal \representante, dan su plena conformidad a los t'erminos y condiciones establecidos en el presente Contrato de Prestaci'on de Servicios y Consultor'ia, firmando en constancia al pie de presente documento.
 \\
-\begin{center}{Cochabamba, \fecha}\end{center}
+\begin{center}{Cochabamba, \fecha}
 \vspace{20mm}
 
-
-
-REPRESENTANTE \hspace*{20mm} REPRESENTANTE \\
-Juan Manuel Castro Arnez \hspace*{20mm} Maria Leticia Blanco Coca \\
-
-%\begin{center}
-%REPRESENTANTE   \hspace*{20mm} REPRESENTANTE
-%\end{center}
-%  \\
-%\begin{center}
-%Noelia Medina  \hspace*{20mm}  Leticia Blanco 
-%\end{center}
-% \\
-
+\begin{tabular}{ c c }
+\asesor & \representante \\
+MIEMBRO DEL DIRECTORIO & REPRESENTANTE LEGAL \\
+\textbf{TIS} & \empresaL
+\end{tabular}
+\end{center}
 
 \end{document}
