@@ -7,7 +7,7 @@
  include '../Modelo/conexion.php';
  $uActivo = $_SESSION['usuario'];
  $conexion = new conexion();
- 
+ $conectar = $conexion; 
 
 ?>
 <!DOCTYPE html>
@@ -197,11 +197,9 @@
             <div class="row">
                 <div class="col-lg-8">
                   
-                    <div class="col-lg-12">
-                                
-                        <img  src="../Librerias/images/SAETIS.png" alt="portadaInicio" class=" img-thumbnail">
-                        
-                    </div>  
+                    <?php
+                        include "_noticias.php";
+                    ?>
                     
                     <!-- /.panel -->
                 </div>
