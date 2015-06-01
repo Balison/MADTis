@@ -1,9 +1,13 @@
-<!DOCTYPE html>
 <?php 
- 
+    session_start();
+    if (isset($_SESSION['tipoUsuario'])){
+        include 'Controlador/root_selector.php';
+        header("Location: ".get_root_path($_SESSION['tipoUsuario']));
+    }
     include 'Modelo/conexion.php';
     $conectar = new conexion();
 ?>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -27,11 +31,11 @@
     
     
     
-        	<link href="Librerias/css/style11.css" rel="stylesheet" type="text/css" />
-		<link href="Librerias/css/tabla-div.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="Librerias/css/coin-slider.css" />
-                <link href="archivos/estilos.css" rel="stylesheet" type="text/css">
-                <script language="JavaScript" src="archivos/script.js" type="text/javascript"></script>
+    <link href="Librerias/css/style11.css" rel="stylesheet" type="text/css" />
+	<link href="Librerias/css/tabla-div.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="Librerias/css/coin-slider.css" />
+    <link href="archivos/estilos.css" rel="stylesheet" type="text/css">
+    <script language="JavaScript" src="archivos/script.js" type="text/javascript"></script>
 
 </head>
 
@@ -64,7 +68,9 @@
             <div class="navbar-header">
             <a class="navbar-brand">Avisos Empresa TIS</a>
                 
-            </div></nav><h2 class="star"><span>&nbsp; </span></h2>
+            </div>
+        </nav>
+            <h2 class="star"><span>&nbsp; </span></h2>
                                            
               
             <?php                                  

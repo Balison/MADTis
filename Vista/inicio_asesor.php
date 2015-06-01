@@ -6,7 +6,11 @@
  validar_permisos('asesor');
 
  $uActivo = $_SESSION['usuario'];
- ?> 
+
+
+ include '../Modelo/conexion.php';
+ $conectar = new conexion();
+?> 
  <!DOCTYPE html>
  <html>
 
@@ -57,6 +61,10 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <!-- Esto por las noticias-->
+    <link href="/Librerias/css/style11.css" rel="stylesheet" type="text/css" />
+    <link href="/archivos/estilos.css" rel="stylesheet" type="text/css">
+    <script language="JavaScript" src="/archivos/script.js" type="text/javascript"></script>
 
 </head>
 
@@ -275,9 +283,13 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <div class="col-lg-12">
+            <?php
+                include "_noticias.php";
+            ?>
+
+            <!--div class="col-lg-12">
                 <img  src="../Librerias/images/SAETIS.png" alt="portadaInicio" class=" img-thumbnail">
-            </div>  
+            </div-->  
             <!-- /.panel -->
         </div>
         <!-- /.col-lg-8 -->
