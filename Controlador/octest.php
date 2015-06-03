@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once("validacionDeAcceso.php");
-    validar_permisos('asesor');
+//    require_once("validacionDeAcceso.php");
+//    validar_permisos('asesor');
     $oldmask = umask(0);
 ?>
 <html>
@@ -25,16 +25,16 @@ $nomA = $nombreAp->NOMBRES_A;
 $apeA = $nombreAp->APELLIDOS_A;
 $nAsesor = $nomA." ".$apeA ;
 
-if (isset($_POST['lista'])) 
+if (true || isset($_POST['lista'])) 
 {
-    if (isset($_POST['fecha']))
+    if (true || isset($_POST['fecha']))
     {
-        if (isset($_POST['hora']))
+        if (true || isset($_POST['hora']))
         {
-            if (isset($_POST['lugar']))
+            if (true || isset($_POST['lugar']))
             {		
                 $existeF = FALSE;
-                $nombreF = '../test/OrdenCambio.tex';
+                $nombreF = '../Repositorio/asesor/OrdenCambio.tex';
                 if (file_exists($nombreF))
                 {
                     $existeF = TRUE;
@@ -42,17 +42,17 @@ if (isset($_POST['lista']))
                             
                 if($existeF)
                 {
-                    $nEmpresa=$_POST['lista']; 
+                    $nEmpresa="EmpresaPrueba"; 
                            
                     if(strnatcasecmp($nEmpresa, "Seleccione una grupo empresa")!=0)
                     {
-        		$fecha = $_POST['fecha'];
-                        $hora = $_POST['hora'];
-                        $lugar = $_POST['lugar'];
+        		$fecha = "hoy";
+                        $hora = "temprano";
+                        $lugar = "memi";
                         $arr = $_POST['text'];
         				
-                        $califi = array();
-                        $observ =array();
+                        $califi =  array();
+                        $observ = array();
                         $encontrar = false;
                         $indice = 1;
                         
@@ -77,7 +77,7 @@ if (isset($_POST['lista']))
                             }
                         }
                                     
-                        if($observ == NULL || $vacio == TRUE)
+                        if(false)
                         {
                             echo "<script type=\"text/javascript\">alert('Las observaciones no pueden estar en blanco '); window.location='../Vista/ordenDeCambio.php';</script>";
                         }
@@ -127,9 +127,9 @@ if (isset($_POST['lista']))
                             $DocSub = $consulta->rowCount();
 
                         
-                            if(($DocSub == $docR) and $DocSub>=1)
+                            if(true)
                             { 
-                                if(isset($_GET['id']))
+                                if(true)
                                 {
                                     $buscar = array(
                                         'empresa_nombre_largo' => '[[empresa-nombre-largo]]',
@@ -264,18 +264,18 @@ if (isset($_POST['lista']))
                                    
                                     if (strcasecmp($nombreDoc, $nombDoc)!=0) 
                                     {
-                                       $comentar = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
-                                       die("Error");
+//                                       $comentar = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
+  //                                     die("Error");
 
-                                       $consulta= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
-                                       $row = $consulta->fetchObject();
-                                       $id = $row -> ID_R;
+    //                                   $consulta= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
+      //                                 $row = $consulta->fetchObject();
+        //                               $id = $row -> ID_R;
 
-                                       $guardarD = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visible','$descargar')");
-                                       $desD=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
-                                       $destinat=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nEmpresa')");
-                                       $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
-                                       die("Error");
+          //                             $guardarD = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visible','$descargar')");
+            //                           $desD=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
+              //                         $destinat=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nEmpresa')");
+                //                       $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
+                  //                     die("Error");
                                     }
 
                                     echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  

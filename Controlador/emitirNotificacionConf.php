@@ -26,7 +26,7 @@ if (isset($_POST['lista']))
   	    if (isset($_POST['lugar']))
             {
                 $existeF = FALSE;
-                $nombreF = '../Repositorio/asesor/NotificacionConformidad.tex';
+                $nombreF = '../test/NotificacionConformidad.tex';
                 if (file_exists($nombreF))
                 {
                     $existeF = TRUE;
@@ -117,7 +117,7 @@ if (isset($_POST['lista']))
                                 $remplazo['sexto_p'] = intval($califi [5]);
                                 $remplazo['septimo_p'] = intval($califi [6]);
 
-                                $ruta ="../Repositorio/asesor";
+                                $ruta ="../test";
                                 chdir($ruta);
 
                                 $id = "NotificacionConformidad";
@@ -151,7 +151,7 @@ if (isset($_POST['lista']))
                                 unlink($log);
                                 unlink($aux);
 
-                                $rutaD = "../".$nombreUGE."/NC/";
+                                $rutaD = "../Repositorio/".$nombreUGE."/NC/";
 
                                 $file = "NotificacionConformidad".'_'.$nEmpresa.'.pdf';
 
@@ -163,9 +163,9 @@ if (isset($_POST['lista']))
                                         chown($rutaD, "bittle2014"); 
                                         chgrp($rutaD, "webtis");
 
-                                        if(!file_exists("../".$nombreUGE."/index.html"))
+                                        if(!file_exists("../Repositorio/".$nombreUGE."/index.html"))
                                         {
-                                            fopen("../".$nombreUGE."/index.html", "x");
+                                            fopen("../Repositorio/".$nombreUGE."/index.html", "x");
                                         }
 
                                     }
@@ -208,7 +208,7 @@ if (isset($_POST['lista']))
 
                                 
 
-                                    $directorioIndex = "../".$nombreUGE."/NC/index.html";
+                                    $directorioIndex = "../Repositorio/".$nombreUGE."/NC/index.html";
         
                                     /*if(!file_exists($directorioIndex))
                                     {

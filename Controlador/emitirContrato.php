@@ -115,9 +115,9 @@
                         mkdir($rutaDir, 0777,TRUE);
 //                        umask($oldmask);
                         
-                        if(!file_exists("../".$nombreUA."/index.html"))
+                        if(!file_exists("../Repositorio/".$nombreUA."/index.html"))
                         {
-                                fopen("../".$nombreUA."/index.html", "x");
+                                fopen("../Repositorio/".$nombreUA."/index.html", "x");
                         }
                     }
                                                    
