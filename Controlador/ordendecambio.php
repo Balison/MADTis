@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once("registrar_correccion.php"); // new
     require_once("validacionDeAcceso.php");
     validar_permisos('asesor');
     $oldmask = umask(0);
@@ -32,7 +33,7 @@ if (isset($_POST['lista']))
         if (isset($_POST['hora']))
         {
             if (isset($_POST['lugar']))
-            {		
+            {       
                 $existeF = FALSE;
                 $nombreF = '../Repositorio/asesor/OrdenCambio.tex';
                 if (file_exists($nombreF))
@@ -46,11 +47,11 @@ if (isset($_POST['lista']))
                            
                     if(strnatcasecmp($nEmpresa, "Seleccione una grupo empresa")!=0)
                     {
-        		$fecha = $_POST['fecha'];
+                $fecha = $_POST['fecha'];
                         $hora = $_POST['hora'];
                         $lugar = $_POST['lugar'];
                         $arr = $_POST['text'];
-        				
+                        
                         $califi = array();
                         $observ =array();
                         $encontrar = false;
@@ -83,7 +84,7 @@ if (isset($_POST['lista']))
                         }
                         else
                         {
-			 
+             
                             $queryStat = "SELECT ge.`NOMBRE_U` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nEmpresa'";
                             $stmt      = $conexion->query($queryStat);
                             $row       = $stmt->fetchObject();
@@ -104,7 +105,7 @@ if (isset($_POST['lista']))
                             $row       = $stmt ->fetchObject();
                             $nomAs = $row->NOMBRES_A;
                             $apeAs = $row->APELLIDOS_A;
-                            $nCompleto = $nomAs."  ".$apeAs;	
+                            $nCompleto = $nomAs."  ".$apeAs;    
 
                             $indice=0;
                             foreach ($arr as $key => $value)
@@ -275,6 +276,12 @@ if (isset($_POST['lista']))
                                        $destinat=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nEmpresa')");
                                        $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
                                        die("Error");
+
+                                       $args['fecha_fin'] = $fecha; //new
+                                       $args['hora_fin'] = $hora; //new
+                                       $args['asesor'] = $nombreUA; //new
+                                       $args['grupo_empresa'] = $nombreCGE; //new
+                                       registrar_correccion($args); //new
                                     }
 
                                     echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
@@ -285,8 +292,8 @@ if (isset($_POST['lista']))
                             {
                                 echo"<script type=\"text/javascript\">alert('La grupo empresa seleccionada aun no ha subido todos los documentos requeridos'); window.location='../Vista/ordenDeCambio.php';</script>"; 
                             }
-			}
-		    }
+            }
+            }
                     else
                     {        
                         echo"<script type=\"text/javascript\">alert('Por favor, seleccione una grupo empresa'); window.location='../Vista/ordenDeCambio.php';</script>";  
@@ -296,8 +303,8 @@ if (isset($_POST['lista']))
                 {
                     echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla de Orden de Cambio a su repositorio'); window.location='../Vista/ordenDeCambio.php';</script>";                  
                 }           
-            }		
-        }	
+            }       
+        }   
     }
 }
 
