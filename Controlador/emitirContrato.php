@@ -52,10 +52,8 @@
                 $seleccion = "SELECT p.`CONVOCATORIA` FROM `proyecto` AS p, `inscripcion_proyecto` AS ip WHERE ip.`NOMBRE_U` = '$nombreUGE[0]' AND ip.`CODIGO_P` = p.`CODIGO_P`";
                 $consulta = $conexion->consulta($seleccion);
                 $convo = mysql_fetch_array($consulta);
-
                 $consulta = $conexion->consulta("SELECT * FROM planificacion WHERE NOMBRE_U='$nombreUGE[0]' AND ESTADO_E='planificacion registrada'");
                 $planifi = mysql_fetch_row($consulta);
-
                 if (is_array($planifi))
                 {       
                     $buscar    = array(
@@ -100,7 +98,6 @@
                     $texto = str_replace($buscar['convocatoria'], $remplazo['convocatoria'], $texto);
                         
                     file_put_contents($tex,$texto);
-
                     exec("pdflatex -interaction=nonstopmode $tex",$final);
                     file_put_contents($tex, $textoAux);
                     unlink($log);
@@ -115,9 +112,9 @@
                         mkdir($rutaDir, 0777,TRUE);
 //                        umask($oldmask);
                         
-                        if(!file_exists("../".$nombreUA."/index.html"))
+                        if(!file_exists("../Repositorio/".$nombreUA."/index.html"))
                         {
-                                fopen("../".$nombreUA."/index.html", "x");
+                                fopen("../Repositorio/".$nombreUA."/index.html", "x");
                         }
                     }
                                                    
@@ -145,12 +142,10 @@
                      
                      $selGE=$conexion->consulta("SELECT `NOMBRE_U` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nLargoGE'");
                      $nomGE=mysql_fetch_array($selGE);
-
                      $estaFir=  $conexion->consulta("UPDATE `inscripcion_proyecto`
                      SET `ESTADO_CONTRATO`= 'Firmado'                   
                     WHERE `NOMBRE_U` = '$nomGE[0]'");  
                     //rename("Contrato.pdf", $pdf);
-
                    /* if(!file_exists("../".$nombreUA."/Contratos/index.html"))
                     {
                         $directorioIndex = "../".$nombreUA."/Contratos/index.html";
@@ -162,7 +157,6 @@
                 else
                 {
                     echo"<script type=\"text/javascript\">alert('La grupo empresa seleccionada no ha registrado aun su planificacion'); window.location='../Vista/contrato.php';</script>";  
-
                 }
                 
             }
