@@ -348,7 +348,7 @@
                                        }
                                        else{}
 
-                                        $desProy=$conexion->consulta("SELECT DISTINCT `NOMBRE_U`FROM `proyecto` AS p,`inscripcion_proyecto` AS i WHERE p.`CODIGO_P` = i.`CODIGO_P` AND  p.`Nombre_P` LIKE '$docDest' ");
+                                        $desProy=$conexion->consulta("SELECT DISTINCT `NOMBRE_U`FROM `proyecto` AS p,`inscripcion_proyecto` AS i WHERE p.`CODIGO_P` = i.`CODIGO_P` AND i.`NOMBRE_U` = '$uActivo' AND  p.`Nombre_P` LIKE '$docDest' ");
                                         $tamProy=mysql_num_rows($desProy);
                                          $nombreP=mysql_fetch_array($desProy);
                                         if($tamProy>0)

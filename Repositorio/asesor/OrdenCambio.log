@@ -1,0 +1,16 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdftex 2015.5.27)  27 MAY 2015 00:07
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**OrdenCambio.tex
+(./OrdenCambio.tex
+! Undefined control sequence.
+l.1 \documentclass
+                  [10pt,letterpaper,twoside]{article}
+? 
+! Emergency stop.
+l.1 \documentclass
+                  [10pt,letterpaper,twoside]{article}
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -19,7 +19,9 @@ mb_internal_encoding('UTF-8');
 //    |   |   |   |- responsivefilemanager
 //    |   |   |   |   |- plugin.min.js
 
-$base_url ="http://bittle.cs.umss.edu.bo";  // DON'T TOUCH (base url (only domain) of site (without final /)).
+//$base_url ="http://bittle.cs.umss.edu.bo";  // DON'T TOUCH (base url (only domain) of site (without final /)).
+//This is a modification by MadSoftware
+$base_url = "";
 $upload_dir = '/Repositorio/asesor/'; // path from base_url to base of upload folder (with start and final /)
 $current_path = '../../Repositorio/asesor/'; // relative path from filemanager folder to upload folder (with final /)
 //thumbs folder can't put inside upload folder

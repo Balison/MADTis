@@ -964,7 +964,7 @@ class PHPMailer
             if (!$this->preSend()) {
                 return false;
             }
-            return $this->postSend();
+	    return  $this->postSend();
         } catch (phpmailerException $exc) {
             $this->mailHeader = '';
             $this->setError($exc->getMessage());
@@ -1299,7 +1299,7 @@ class PHPMailer
 
         foreach ($hosts as $hostentry) {
             $hostinfo = array();
-            if (!preg_match('/^((ssl|tls):\/\/)*([a-zA-Z0-9\.-]*):?([0-9]*)$/', trim($hostentry), $hostinfo)) {
+           if (!preg_match('/^((ssl|tls):\/\/)*([a-zA-Z0-9\.-]*):?([0-9]*)$/', trim($hostentry), $hostinfo)) {
                 // Not a valid host entry
                 continue;
             }

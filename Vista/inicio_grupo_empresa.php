@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 
  session_start();
@@ -8,9 +7,10 @@
  include '../Modelo/conexion.php';
  $uActivo = $_SESSION['usuario'];
  $conexion = new conexion();
- 
+ $conectar = $conexion; 
 
 ?>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -67,6 +67,14 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Esto por las noticias-->
+    <link href="/Librerias/css/style11.css" rel="stylesheet" type="text/css" />
+    <link href="/archivos/estilos.css" rel="stylesheet" type="text/css">
+    <script language="JavaScript" src="/archivos/script.js" type="text/javascript"></script>
+
+
+
 </head>
 
 <body>
@@ -197,11 +205,9 @@
             <div class="row">
                 <div class="col-lg-8">
                   
-                    <div class="col-lg-12">
-                                
-                        <img  src="../Librerias/images/SAETIS.png" alt="portadaInicio" class=" img-thumbnail">
-                        
-                    </div>  
+                    <?php
+                        include "_noticias.php";
+                    ?>
                     
                     <!-- /.panel -->
                 </div>

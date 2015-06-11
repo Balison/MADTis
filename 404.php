@@ -1,20 +1,32 @@
- <!DOCTYPE html>
- <html>
+<?php
+session_start();
+include "Controlador/root_selector.php";
+$path = "/index.php";
+if (isset($_SESSION['tipoUsuario'])){
+   $path = get_root_path($_SESSION['tipoUsuario']);
+}
 
- <head>
-    <title>SAETIS - Sitio no encontrado</title>
-    <link rel="stylesheet" type="text/css" href="http://localhost/Saetis/css/error404.css">
-</head>
+echo <<< HTML
+   <!DOCTYPE html>
+   <html>
 
-<body>
-    <div class = "center" align = "center">
+   <head>
+       <title>SAETIS - Sitio no encontrado</title>
+       <link rel="stylesheet" type="text/css" href="/css/error404.css">
+   </head>
 
-        <h1 class="page-header"  >Sitio no encontrado</h1>
-        <p>Lo sentimos, pero la pagina que busca no existe o no se puede encontrar</p>
-        <a href="http://localhost/Saetis/index.php">Volver a SAETIS</a><br>
-        <img  src="http://localhost/Saetis/imagenes/error404.png">
-    </div>
+   <body>
+       <div class = "center" align = "center">
 
-</body>
+           <h1 class="page-header"  >Sitio no encontrado</h1>
+           <p>Lo sentimos, pero la pagina que busca no existe o no se puede encontrar.</p>
+           <a href='$path'>Volver a SAETIS</a><br>
+           <img  src="/imagenes/error404.png">
+       </div>
 
-</html>
+   </body>
+
+   </html>
+HTML;
+
+?>
