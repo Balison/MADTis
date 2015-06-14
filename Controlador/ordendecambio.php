@@ -229,24 +229,27 @@ if (isset($_POST['lista']))
                                    
                                     if (strcasecmp($nombreDoc, $nombDoc)!=0) 
                                     {
-                                       $comentar = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
-                                       die("Error");
+                                       //$comentar = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
+                                       //die("Error");
                                        $consulta= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
                                        $row = $consulta->fetchObject();
                                        $id = $row -> ID_R;
-                                       $guardarD = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visible','$descargar')");
-                                       $desD=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
-                                       $destinat=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nEmpresa')");
-                                       $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
-                                       die("Error");
+                                       //$guardarD = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visible','$descargar')");
+                                       //$desD=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
+                                       //$destinat=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nEmpresa')");
+                                       //$guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
+                                       //die("Error");
 
                                        $args['fecha_fin'] = $fecha; //new
                                        $args['hora_fin'] = $hora; //new
                                        $args['asesor'] = $nombreUA; //new
                                        $args['grupo_empresa'] = $nombreCGE; //new
-                                       registrar_correccion($args); //new
+                                       registrar_correccion($args, $conexion); //new
+
+                                       echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";
                                     }
-                                    echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
+                                    else
+                                        echo"<script type=\"text/javascript\">alert('Ya existe orden de cambio para la empresa'); window.location='../Vista/ordenDeCambio.php';</script>";  
                                }
                             }
                             else
