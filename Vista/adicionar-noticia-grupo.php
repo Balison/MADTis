@@ -1,11 +1,6 @@
 <?php
     
-    session_start();
-
-    require_once("../Controlador/validacionDeAcceso.php");
-    validar_permisos('grupoEmpresa'); 
-    include '../Modelo/conexion.php';
-    $uActivo = $_SESSION['usuario'];
+    require_once("MenuGE.php");
   
 
     $con=new conexion();

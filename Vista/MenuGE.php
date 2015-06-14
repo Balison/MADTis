@@ -58,10 +58,10 @@
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeAc.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
+
+    <!-- Esto por noticia-grupo-->
+    <script src="../Librerias/js/jquery-te-1.4.0.min.js"></script>  
     <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
-    <script src="../Librerias/js/jquery-te-1.4.0.min.js"></script>
-
-
 
     <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
