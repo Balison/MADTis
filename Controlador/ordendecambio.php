@@ -205,7 +205,7 @@ if (isset($_POST['lista']))
                                     $texto = str_replace($buscar['obs_det_item'], $remplazo['obs_det_item'], $texto);
                                     file_put_contents($tex,$texto);
                                     exec("pdflatex -interaction=nonstopmode $tex",$final);
-                                    
+
                                     file_put_contents($tex, $textoAux);
                                     unlink($log);
                                     unlink($aux);
