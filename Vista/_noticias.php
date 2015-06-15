@@ -79,11 +79,11 @@
 
     <td style="width: 3%">
     <table style="height: 390px" border="0" cellpadding="0" cellspacing="0">
-    <tr style="height: 20%"><td><img id="masarriba" alt="Arriba Rapido" src="/imagenes/masarriba.jpg" style="opacity:0.3; filter:alpha(opacity=29);" onmouseover="control_aviso('masarriba')" onmousedown="control_aviso('masarriba')" onmouseout="control_salir_aviso('masarriba')" /></td></tr>
-    <tr style="height: 20%"><td><img id="arriba" alt="Arriba" src="/imagenes/arriba.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('arriba')" onmousedown="control_aviso('arriba')" onmouseout="control_salir_aviso('arriba')" /></td></tr>
-    <tr style="height: 20%"><td><img id="alto" alt="Detener" src="/imagenes/alto.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('alto')" onmousedown="control_aviso('alto')" onmouseout="control_salir_aviso('alto')" /></td></tr>
-    <tr style="height: 20%"><td><img id="abajo" alt="Abajo" src="/imagenes/abajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('abajo')" onmousedown="control_aviso('abajo')" onmouseout="control_salir_aviso('abajo')" /></td></tr>
-    <tr style="height: 20%"><td><img id="masabajo" alt="Abajo Rapido" src="/imagenes/masabajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('masabajo')" onmousedown="control_aviso('masabajo')" onmouseout="control_salir_aviso('masabajo')" /></td></tr>
+    <tr style="height: 20%"><td><img id="masarriba" alt="Arriba Rapido" src="../imagenes/masarriba.jpg" style="opacity:0.3; filter:alpha(opacity=29);" onmouseover="control_aviso('masarriba')" onmousedown="control_aviso('masarriba')" onmouseout="control_salir_aviso('masarriba')" /></td></tr>
+    <tr style="height: 20%"><td><img id="arriba" alt="Arriba" src="../imagenes/arriba.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('arriba')" onmousedown="control_aviso('arriba')" onmouseout="control_salir_aviso('arriba')" /></td></tr>
+    <tr style="height: 20%"><td><img id="alto" alt="Detener" src="../imagenes/alto.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('alto')" onmousedown="control_aviso('alto')" onmouseout="control_salir_aviso('alto')" /></td></tr>
+    <tr style="height: 20%"><td><img id="abajo" alt="Abajo" src="../imagenes/abajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('abajo')" onmousedown="control_aviso('abajo')" onmouseout="control_salir_aviso('abajo')" /></td></tr>
+    <tr style="height: 20%"><td><img id="masabajo" alt="Abajo Rapido" src="../imagenes/masabajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('masabajo')" onmousedown="control_aviso('masabajo')" onmouseout="control_salir_aviso('masabajo')" /></td></tr>
     </table></table></table>
 
          

@@ -212,6 +212,10 @@ if (isset($_POST['lista']))
                                     //rename("OrdenCambio.pdf", $file);
                                     rename("OrdenCambio.pdf", $rutaD.$pdf );
                                     $nruta = "../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";
+                                    
+                                    $fecha_f = $fecha;
+                                    $hora_f = $hora;
+
                                     $fecha = date('Y-m-d');
                                     $hora  = date("G:H:i");
                                     $visible = "TRUE";
@@ -240,13 +244,16 @@ if (isset($_POST['lista']))
                                        $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
                                        die("Error");
 
-                                       $args['fecha_fin'] = $fecha; //new
-                                       $args['hora_fin'] = $hora; //new
+                                       $args['fecha_fin'] = $fecha_f; //new
+                                       $args['hora_fin'] = $hora_f; //new
                                        $args['asesor'] = $nombreUA; //new
-                                       $args['grupo_empresa'] = $nombreCGE; //new
-                                       registrar_correccion($args); //new
+                                       $args['grupo_empresa'] = $nombreUGE; //new
+                                       registrar_correccion($args, $conexion); //new
+
+                                       echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";
                                     }
-                                    echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
+                                    else
+                                        echo"<script type=\"text/javascript\">alert('Ya existe orden de cambio para la empresa'); window.location='../Vista/ordenDeCambio.php';</script>";  
                                }
                             }
                             else
