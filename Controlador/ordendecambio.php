@@ -244,9 +244,12 @@ if (isset($_POST['lista']))
                                        $args['hora_fin'] = $hora; //new
                                        $args['asesor'] = $nombreUA; //new
                                        $args['grupo_empresa'] = $nombreCGE; //new
-                                       registrar_correccion($args); //new
+                                       registrar_correccion($args, $conexion); //new
+
+                                       echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";
                                     }
-                                  //  echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
+                                    else
+                                        echo"<script type=\"text/javascript\">alert('Ya existe orden de cambio para la empresa'); window.location='../Vista/ordenDeCambio.php';</script>";  
                                }
                             }
                             else
