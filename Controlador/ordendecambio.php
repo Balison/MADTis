@@ -246,7 +246,7 @@ if (isset($_POST['lista']))
                                        $args['grupo_empresa'] = $nombreCGE; //new
                                        registrar_correccion($args); //new
                                     }
-                                    echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
+                                  //  echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
                                }
                             }
                             else
