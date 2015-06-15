@@ -143,6 +143,17 @@
                                                    </li>';  
                                             
                                         }
+
+                                        $correcReq = $conexion->consulta("SELECT NOMBRE_R FROM registro, correccion_r WHERE correccion_r.ID_R = registro.ID_R AND correccion_r.GRUPO_EMPRESA = '$uActivo'");
+                                     
+                                        while ($rowDocs = mysql_fetch_row($correcReq))
+                                        {
+                                            //subirDocumento reemplazar por correcion para mostrar bien :D   
+                                            echo '<li>
+                                                  <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a> 
+                                                   </li>';  
+                                            
+                                        }
                                         
                                     ?>
                                     </ul>
