@@ -243,7 +243,7 @@ if (isset($_POST['lista']))
                                        $args['fecha_fin'] = $fecha; //new
                                        $args['hora_fin'] = $hora; //new
                                        $args['asesor'] = $nombreUA; //new
-                                       $args['grupo_empresa'] = $nombreCGE; //new
+                                       $args['grupo_empresa'] = $nombreU; //new
                                        registrar_correccion($args, $conexion); //new
 
                                        echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";
