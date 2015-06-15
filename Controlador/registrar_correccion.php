@@ -9,7 +9,7 @@
     	$InsertarRegistro = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) 
         	VALUES ('$usuario','documento requerido','Habilitado','Correccion','$fechaR','$horaR')");
         $SeleccionDocumentoID = $conexion->query("SELECT MAX(ID_R) FROM registro WHERE NOMBRE_U = '$usuario' AND TIPO_T = 'documento requerido'");
-		if(mysql_num_rows($SeleccionDocumentoID) > 0){
+		if(mysqli_num_rows($SeleccionDocumentoID) > 0){
 		echo "<SCRIPT LANGUAGE='javascript'>". 
 		            " alert('es mas de uno');".
 		            " document.location=('../Vista/ordenDeCambio.php');</SCRIPT>";
