@@ -184,7 +184,7 @@ function registrarReportesSemanal() {
                                        '<td class="col-md-2">'+
                                            '<div class="form-group">'+
                                                '<div class="col-md-12">'+
-                                                   '<textarea class="form-control" rows="4" name="'+rol+'Actividades"></textarea>'+
+                                                   '<textarea class="form-control" rows="4" name="'+rol+'Actividades" placeholder="[Escriba aqui sus actividades]"></textarea>'+
                                                '</div>'+
                                            '</div>'+
                                        '</td>'+
@@ -203,21 +203,21 @@ function registrarReportesSemanal() {
                                        '<td class="col-md-2">'+
                                            '<div class="form-group">'+
                                                '<div class="col-md-12">'+
-                                                   '<textarea class="form-control" rows="4" name="'+rol+'Resultados"></textarea>'+
+                                                   '<textarea class="form-control" rows="4" name="'+rol+'Resultados" placeholder="[Escriba aqui sus resultados]"></textarea>'+
                                                '</div>'+
                                            '</div>'+
                                        '</td>'+
                                        '<td class="col-md-2">'+
                                            '<div class="form-group">'+
                                                '<div class="col-md-12">'+
-                                                   '<textarea class="form-control" rows="4" name="'+rol+'Conclusiones"></textarea>'+
+                                                   '<textarea class="form-control" rows="4" name="'+rol+'Conclusiones" placeholder="[Escriba aqui sus conclusiones]"></textarea>'+
                                                '</div>'+
                                            '</div>'+
                                        '</td>'+
                                        '<td class="col-md-2">'+
                                            '<div class="form-group">'+
                                                '<div class="col-md-12">'+
-                                                   '<textarea class="form-control" rows="4" name="'+rol+'Observaciones"></textarea>'+
+                                                   '<textarea class="form-control" rows="4" name="'+rol+'Observaciones" placeholder="[Escriba aqui sus observaciones]"></textarea>'+
                                                '</div>'+
                                            '</div>'+
                                        '</td>'+
@@ -247,7 +247,7 @@ function registrarReportesSemanal() {
                             container: 'tooltip',
                             validators: {
                                 notEmpty: {
-                                    message: 'Las actividades es un dato requerido'
+                                    message: 'Las actividades son datos requeridos'
                                 },
                                 stringLength: {
                                     max: 50,
@@ -267,7 +267,7 @@ function registrarReportesSemanal() {
                             container: 'tooltip',
                             validators: {
                                 notEmpty: {
-                                    message: 'Los resultados es un dato requerido'
+                                    message: 'Los resultados son datos requeridos'
                                 },
                                 stringLength: {
                                     max: 50,
@@ -278,9 +278,9 @@ function registrarReportesSemanal() {
                         .bootstrapValidator('addField', rol+'Conclusiones', {
                             container: 'tooltip',
                             validators: {
-                                notEmpty: {
-                                    message: 'Las conclusiones es un dato requerido'
-                                },
+                                /*notEmpty: {
+                                    message: 'Las conclusiones son datos requeridos'
+                                },*/
                                 stringLength: {
                                     max: 50,
                                     message: 'Las conclusiones deben ser menor o igual a 50 caracteres'
@@ -290,9 +290,9 @@ function registrarReportesSemanal() {
                         .bootstrapValidator('addField', rol+'Observaciones', {
                             container: 'tooltip',
                             validators: {
-                                notEmpty: {
-                                    message: 'Las observaciones es un dato requerido'
-                                },
+                                /*notEmpty: {
+                                    message: 'Las observaciones son datos requeridos'
+                                },*/
                                 stringLength: {
                                     max: 50,
                                     message: 'Las observaciones deben ser menor o igual a 50 caracteres'
