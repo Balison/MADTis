@@ -35,7 +35,7 @@
     $OC = mysql_num_rows($Sel_OC);
     if(is_array($Inscrip))
     {
-      $consDoc = $conexion->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$uActivo' AND NOMBRE_R = 'Correccion'");
+      $consDoc = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$uActivo' AND NOMBRE_R = 'Correccion'");
 
       $verifDoc = mysql_fetch_row($consDoc);
       
