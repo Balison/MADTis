@@ -50,12 +50,13 @@
 
                                     $verifDoc = mysql_fetch_row($consDoc);
                                     
+                                    $correccionesSubidas = is_array($verifDoc);
 
-                                    if(is_array($verifDoc))
+                                    if($correccionesSubidas)
                                     {
                                           
                                           echo '<div class="alert alert-warning">
-                                                    <strong>Usted ya subio el documento correspondiente</strong>
+                                                    <strong>Usted ya ha subido la correccion correspondiente</strong>
                                                 </div>';
                                     }
                                     else

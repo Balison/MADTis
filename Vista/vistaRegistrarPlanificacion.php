@@ -35,7 +35,13 @@
     $OC = mysql_num_rows($Sel_OC);
     if(is_array($Inscrip))
     {
-      if($NC >= 1 or $OC>=1)
+      $consDoc = $conexion->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$uActivo' AND NOMBRE_R = 'Correccion'");
+
+      $verifDoc = mysql_fetch_row($consDoc);
+      
+      $correccionesSubidas = is_array($verifDoc);
+
+      if($NC >= 1 or ($OC>=1 and $correccionesSubidas))
       {
         $Planif = new Planificacion($usuario);
         $estado = $Planif->getEstado();
