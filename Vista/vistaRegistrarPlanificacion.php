@@ -302,9 +302,15 @@
       }
       else
       {
-        echo '<div class="alert alert-warning">
-                <strong>Podra registrar su planificacion una vez se haya emitido una orden de cambio o notificacion de conformidad para su grupo empresa</strong>
-              </div>';
+        if ($OC >= 1 and !$correccionesSubidas)
+          echo '<div class="alert alert-warning">
+                  <strong>No es posible registrar la planificacion, por favor verifique que no tiene correcciones pendientes.</strong>
+                </div>';
+        else 
+          echo '<div class="alert alert-warning">
+                  <strong>No es posible registrar la planificacion, por favor espere a que le envien una notificacion de conformidad u orden de cambio.</strong>
+                </div>'; 
+
       }
     }
     else
