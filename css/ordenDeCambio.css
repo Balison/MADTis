@@ -1,0 +1,15 @@
+#document-list td{
+	padding-right: 30px;
+}
+
+label.obs{
+	font-size: 17px;
+}
+
+a {
+	cursor: pointer;
+}
+
+a.delete-obs{
+	color: blue;
+}

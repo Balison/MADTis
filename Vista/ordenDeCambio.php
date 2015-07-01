@@ -68,6 +68,10 @@
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+    <!-- importa la funcionalidad para el formulario -->
+    <script type="text/javascript" src = "/js/orden_de_cambio.js"></script>
+    <!-- importa los estilos para la tabla dinamica de observaciones -->
+    <link rel="stylesheet" type="text/css" href="/css/ordenDeCambio.css">
 </head>
 
 <body>
@@ -286,8 +290,8 @@
                       <div class="form-group" >
                       <label class="col-sm-2 control-label">Grupo Empresa</label>
                         <div class="col-xs-4"> 
-                          <select name="lista" class="form-control">
-                            <option>Seleccione una grupo empresa</option>
+                          <select required name="lista" class="form-control" id = 'ge-list'>
+                            <option value = ""> -- Seleccione una grupo empresa -- </option>
                             <?php
                                 $idAsesor= $_SESSION['usuario']  ;
                                 $estado = "Habilitado";
@@ -295,7 +299,7 @@
                                 $consulta = $con->consulta($seleccion);
                                 
                                 while($grupoE =  mysql_fetch_array($consulta)){
-                                    echo "<option>".$grupoE[0]."</option>";
+                                    echo "<option value = '".$grupoE[0]."'>".$grupoE[0]."</option>";
                                 }
                                 echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";           
                             ?>
@@ -409,16 +413,8 @@
                         
                     </div><!--end/lugar-->
 
-
-                      <div class="form-group" >
-                        <label class="col-sm-2 control-label">Observaciones</label>
-                         <a onclick="agregarHijo()" class="link-dos" > Agregar Observacion&nbsp;&nbsp;</a><span class="glyphicon glyphicon-plus"></span>
-                         <a onclick="quitarHijo()" class="link-dos" > Quitar Observacion&nbsp;&nbsp;</a> <span class="glyphicon glyphicon-minus"></span>
-                         
-                         <div id = "observaciones" style="height: 200px;width:600px;overflow: scroll">
-                         </div>
-                      </div><!--end/observaciones-->
-                     
+                        <!--aca llenamos las observaciones -->
+                        <div id = 'observaciones-block' ></div>
                     
                     <div class   ="form-group">
                       <div class   ="col-sm-8">
