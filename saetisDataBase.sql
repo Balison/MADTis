@@ -1429,4 +1429,16 @@ UNLOCK TABLES;
 -- Dump completed on 2015-06-03 11:21:51
 -- CORRECCION_R stores data about corrections that eg's must complete
 
+DROP TABLE IF EXISTS correccion_r;
+
 create table correccion_r (ID_R INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, GRUPO_EMPRESA VARCHAR(50) NOT NULL);
+
+DROP TABLE IF EXISTS correcciones;
+
+CREATE TABLE correcciones (
+  ID_R INT NOT NULL,
+  NOMBRE_CORRECCION VARCHAR(50) NOT NULL,
+  ID INT AUTO_INCREMENT,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID_R) REFERENCES registro(ID_R)
+);  

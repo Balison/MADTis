@@ -6,28 +6,6 @@
 
 var indice = 0;
 
-function agregarHijo() 
-{
-  indice++;
-  var label=document.createElement('label');
-  label.innerHTML='Observación N°'+indice;
-  label.id='eti'+indice;
-  var nuevohijo = document.createElement('input');
-  nuevohijo.type = 'text';
-  nuevohijo.name = 'nombre' + indice;
-  nuevohijo.id = 'nombre' + indice;
-  nuevohijo.className='form-control';
-  document.getElementById('observaciones').appendChild(nuevohijo);
-  document.getElementById('observaciones').appendChild(label);
-}
-function quitarHijo()
-{
-    var hijo=document.getElementById('nombre'+indice);
-    var label=document.getElementById('eti'+indice);
-    document.getElementById('observaciones').removeChild(hijo);
-    document.getElementById('observaciones').removeChild(label);
-    indice--;
-}
 
 function validarLetras(e) { // 1
     tecla = (document.all) ? e.keyCode : e.which;
@@ -55,8 +33,13 @@ function validarNumeros(e)
 }
   
 function validarCampos(formulario) {
+
+        if ($('#ge-list').val() == ""){
+            alert('Por favor, seleccione una grupo empresa')
+        }
         
-        if(indice==0){alert('Se requiere al menos una Observaci\u00f3n');
+        console.log($('input:checked').length);
+        if($('input:checked').length == 0){alert('Se requiere realizar al menos una observaci\u00f3n a al menos un documento');
         
         return false;}
         
