@@ -115,7 +115,7 @@
                 $montoAct = $porcen["MONTO_P"]; 
             }
             $peticion8 = $conectar->consulta("SELECT e.ENTREGABLE_P, v.NOTA, v.ACEPTADA FROM `entrega` as e, `evaluacionElemento` as v WHERE e.ID_R='$IDPago' 
-                and v.ID_PAGO='$IDPago' and e.ENTREGADO_P='1' and e.ENTREGABLE_P = v.NOMBRE_E");
+                and v.ID_PAGO='$IDPago' and e.ENTREGADO_P='1' and e.ENTREGABLE_P = v.NOMBRE_E and v.TIPO = 'Entregable'");
             $tamanio = mysql_num_rows($peticion8);
             //$entregables = mysql_fetch_array($peticion8);
 
