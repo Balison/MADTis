@@ -41,6 +41,7 @@ function cerrarConexion() {
 }
 
 		public function consultarTabla($query) {
+            
             $tabla = array();
             $resConsulta = $this->consulta($query);
             $i = 0;
@@ -67,6 +68,7 @@ function cerrarConexion() {
         }
        
         public function consultaUnDato($query) {
+            
             $dato = -1;
             $resConsulta = $this->consulta($query);
             while ($fila = mysql_fetch_array($resConsulta)) {            
