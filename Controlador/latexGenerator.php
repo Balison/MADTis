@@ -15,7 +15,7 @@
 	}
 
 	function bold($str){
-		return "\\textbf $str";
+		return "\\textbf{".$str."}";
 	}
 
 	function enumerate($list){
@@ -27,6 +27,6 @@
 	}
 	function item($str)
 	{
-		return "\\item $str";
+		return "\\item {".$str."}";
 	}
 ?>

@@ -46,4 +46,19 @@
 		            " document.location=('../Vista/ordenDeCambio.php');</SCRIPT>";
 		}
     }
+
+
+    function recordSavedCorrections($docs, $paths, $connection){
+    	$success = count($docs) == count($paths);
+
+		for($i = 0; $i < count($docs) && $success; ++$i){
+			$success = recordsavedCorrection($docs[$i][0], $paths[$i], $connection);
+		}
+	
+    	return $success;
+    }
+
+    function recordSavedCorrection($id, $path, $connection){
+    	return $connection->consulta("INSERT INTO documentos_corregidos(ID_C, RUTA) VALUES ($id, '$path')");
+    }
 ?>

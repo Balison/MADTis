@@ -1443,6 +1443,18 @@ CREATE TABLE correcciones (
   FOREIGN KEY (ID_R) REFERENCES registro(ID_R)
 );  
 
+
+DROP TABLE IF EXISTS documentos_corregidos;
+
+CREATE TABLE documentos_corregidos(
+  ID_C INT NOT NULL,
+  RUTA VARCHAR(150) NOT NULL,
+  ID INT AUTO_INCREMENT,
+  CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID_C) REFERENCES correcciones(ID)
+);
+
 DROP TABLE IF EXISTS evaluacionElemento;
 
 CREATE TABLE evaluacionElemento (

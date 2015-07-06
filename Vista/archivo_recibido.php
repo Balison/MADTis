@@ -2,6 +2,7 @@
  session_start();
 
  require_once("../Controlador/validacionDeAcceso.php");
+ require_once("../Controlador/documentRetriever.php");
  validar_permisos('asesor');
 
  include '../Modelo/conexion.php';
@@ -281,17 +282,24 @@
                                     }
                                     else
                                     {
-                                        $ax='';
+                                        $uEmpresa='';
                                         $consultaAuxiliar=$con->consulta("SELECT ge.`NOMBRE_U` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '".$_POST['grupoempresa']."'");
                                         while ($conAux = mysql_fetch_array($consultaAuxiliar)) {
-                                            $ax=$conAux['0'];
+                                            $uEmpresa=$conAux['0'];
                                         }
                                         
-                                        $consultaUno=$con->consulta("SELECT DISTINCT r.`NOMBRE_R`,d.`RUTA_D` FROM `registro` AS r,`documento` AS d WHERE d.`ID_R` = r.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` LIKE '$ax'");
+                                        $consultaUno=$con->consulta("SELECT DISTINCT r.`NOMBRE_R`,d.`RUTA_D` FROM `registro` AS r,`documento` AS d WHERE d.`ID_R` = r.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` LIKE '$uEmpresa'");
+                                        $correctionsPath = retrieveCorrectionsPaths($uEmpresa, $con);//mock
+
                                         if(mysql_num_rows($consultaUno) != 0)
                                         {
                                             while ($conAuxDos = mysql_fetch_array($consultaUno)) {
-                                                echo "<a class='btn btn-default btn-lg btn-block' href='..".$conAuxDos['1']."'>".$conAuxDos[0]."</a><br>";
+                                                $name = $conAuxDos[0];
+                                                echo "<a class='btn btn-default btn-lg btn-block' href='..".$conAuxDos['1']."' target = '_blank'>".$name."</a>";
+                                                if (isset($correctionsPath[$name])){
+                                                    echo "<a class='btn btn-default btn-lg btn-block' href='".$correctionsPath[$name]."' target = '_blank'> Correccion ".$name."</a>";
+                                                }
+                                                echo "<br>";
                                             }
                                         }
                                         else

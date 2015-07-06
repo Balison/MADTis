@@ -1,6 +1,10 @@
 
 $(document).ready(function(){
 	$('#ge-list').on('change', modifyObs);
+	start_persistence({
+		key: $('#ge-list').val(),
+		membrecy: 'persistent'
+	});
 });
 
 /*
@@ -19,7 +23,7 @@ function modifyObs(){
 		data: {empresa: $("#ge-list").val()}
 	}).done(function (html){
 		obs.append(html);
-
+		change_persistence_key($('#ge-list').val());
 		$('div .doc-obs').hide();
 
 
@@ -32,16 +36,30 @@ function modifyObs(){
 			docObs = "#obs-"+docName;
 			
 			$(docObs).stop().slideToggle(400, function(){
-				console.log($(docObs).children('input').length);
 				var observaciones = $(docObs+'-block').children('input');
 
-				if (checkbox.is(':checked') && observaciones.length == 0){
-					addObs(docName);
+				var i = 0;
+				while (getValueInt('obs-count') > i){
+					addObs(docName, false);
+
+					i++;
+					if (i > 20) break;
 				}
+
+				if (checkbox.is(':checked') && i == 0){
+					addObs(docName, true);
+				}
+
 
 				observaciones.each(function(i, obj){
 					obj.required = checkbox.is(':checked');
-					console.log("changing");
+					if (obj.required == true){
+						obj.setAttribute('pattern', '\\S.+');
+					} else {
+	
+						obj.setAttribute('pattern', '.*');
+					}
+
 				});
 			});
 		});
@@ -54,7 +72,7 @@ Añade una fila para una nueva observacion en la
 lista de observaciones de 'aDoc'.
 */
 
-function addObs(aDoc){
+function addObs(aDoc, count){
 	target = $("#obs-"+aDoc+"-block");
 	nextID = target.children().length / 2;
 	name = aDoc+"-"+(nextID);
@@ -65,7 +83,12 @@ function addObs(aDoc){
 
 	target.append("<input required type = 'text' name = '"
 					+name+"' id = 'input-"+name
-					+"' class = 'form-control'>");
+					+"' pattern = "+'"\\S.+"' 
+					+"  title = 'La observacion esta vacia o tiene espacios en blanco al inicio'"
+					+"  class = 'persistent obs-control form-control'>");
+
+	if (count)
+		setValueInt('obs-count', '++');
 }
 
 /*
@@ -78,6 +101,10 @@ function deleteObs(obs){
 	var input = "#input-"+obs;
 	var id = getIDFrom(obs);
 	var doc = getPrefixFrom(obs);
+
+	setValueInt('obs-count', '--');
+	unsetStored($(input));
+
 	$(label).remove();
 	$(input).remove();
 
@@ -97,16 +124,22 @@ function deleteObs(obs){
 			label.innerHTML = "Observacion #" + (id+1) 
 								+" (<a class = 'delete-obs' onclick = \"deleteObs('"
 								+doc+"-"+id+"')\"> eliminar </a>)";
-	
-			decreaseAttr("name", input);
-			decreaseAttr("id", input);
+
+			var oldName = input.getAttribute('name');
+			var current = decreaseAttr("name", input);
+			var newID 	= decreaseAttr("id", input);
+		
+			swapValues(oldName	, current);
+			set($('#'.newID));
 		}
 	}
+
 }
 
 /*
 Decrementa en 1 el valor del indice del atributo 'attr' 
 del objeto 'obj' (obj es un DOM object de javascript)
+Devuelve el nuevo valor del 'attr'
 */
 
 function decreaseAttr(attr, obj){
@@ -115,6 +148,8 @@ function decreaseAttr(attr, obj){
 	var prefix = getPrefixFrom(obj.getAttribute(attr));
 
 	obj.setAttribute(attr, prefix+"-"+(attrID-1));
+
+	return prefix+"-"+(attrID-1);
 }
 
 /* 	Obtiene el id de la cadena 'cad' (el id es un identificador 
