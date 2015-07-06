@@ -36,13 +36,12 @@ function modifyObs(){
 			docObs = "#obs-"+docName;
 			
 			$(docObs).stop().slideToggle(400, function(){
-				console.log($(docObs).children('input').length);
 				var observaciones = $(docObs+'-block').children('input');
 
 				var i = 0;
 				while (getValueInt('obs-count') > i){
 					addObs(docName, false);
-					console.log(getValueInt('obs-count') + " - " + observaciones.length);
+
 					i++;
 					if (i > 20) break;
 				}
@@ -57,10 +56,10 @@ function modifyObs(){
 					if (obj.required == true){
 						obj.setAttribute('pattern', '\\S.+');
 					} else {
-						console.log('lala');
+	
 						obj.setAttribute('pattern', '.*');
 					}
-					console.log("changing");
+
 				});
 			});
 		});
