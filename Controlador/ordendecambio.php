@@ -133,8 +133,8 @@ if (isset($_POST['lista']))
                                     $docID = preg_replace('/\s+/', '-', $doc);
                                     $obsName = $docID.'-0';
 
-                                    while (isset($_POST($obsName))){
-                                        $obs[$doc][] = $_POST($obsName);
+                                    while (isset($_POST[$obsName])){
+                                        $obs[$doc][] = $_POST[$obsName];
                                         $idx++;           
                                         $obsName = $docID.'-'.$idx;
                                     }
@@ -205,8 +205,8 @@ if (isset($_POST['lista']))
                                   $row= $consulta->fetchObject();
                                   $nombDoc = $row->NOMBRE_R;
                                 }
-                               
-                                if (strcasecmp($nombreDoc, $nombDoc)!=0) 
+                                if(true)
+                                //if (strcasecmp($nombreDoc, $nombDoc)!=0) 
                                 {
                                    $comentar = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
                                    die("Error");

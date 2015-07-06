@@ -34,8 +34,22 @@ function validarNumeros(e)
   
 function validarCampos(formulario) {
 
+        var obs = $('.obs-control');
+
+        for(var i = obs; i < obs.length; i++){
+            
+            if (obs.is(':required') && $.trim(obs[i].val()) == ''){
+
+                alert("La observacion no puede estar en blanco")
+                obs[i].focus();
+                return false;
+            }
+        }
+
+
         if ($('#ge-list').val() == ""){
-            alert('Por favor, seleccione una grupo empresa')
+            alert('Por favor, seleccione una grupo empresa');
+            return false;
         }
         
         console.log($('input:checked').length);

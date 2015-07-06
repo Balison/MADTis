@@ -68,6 +68,8 @@
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+    <!-- importa persistencia de datos -->
+    <script type="text/javascript" src = "/js/data_persistence.js"></script>
     <!-- importa la funcionalidad para el formulario -->
     <script type="text/javascript" src = "/js/orden_de_cambio.js"></script>
     <!-- importa los estilos para la tabla dinamica de observaciones -->
@@ -328,7 +330,7 @@
                           <td>Cumplimiento de especificaciones del proponente</td>
                           <td>15 puntos</td>
                           <td> 
-                           <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[1]" id="textfield1" onkeypress="return validarNumeros(event)">
+                           <input type="text" class="persistent form-control" style ="width:45px;height:45px;" name="text[1]" id="textfield1" onkeypress="return validarNumeros(event)">
                           </td>
                         </tr>
                         <tr>
@@ -336,7 +338,7 @@
                           <td>Claridad en la organizaci&oacute;n de la empresa proponente</td>
                           <td>10 puntos</td>
                           <td>
-                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[2]" id="textfield2" onkeypress="return validarNumeros(event)">
+                              <input type="text" class="persistent form-control" style ="width:45px;height:45px;" name="text[2]" id="textfield2" onkeypress="return validarNumeros(event)">
                           </td>
                         </tr>
                         <tr>
@@ -344,7 +346,7 @@
                           <td>Cumplimiento de especificaciones t&eacute;cnicas</td>
                           <td>30 puntos</td>
                           <td>
-                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[3]" id="textfield3" onkeypress="return validarNumeros(event)">
+                              <input type="text" class="persistent form-control" style ="width:45px;height:45px;" name="text[3]" id="textfield3" onkeypress="return validarNumeros(event)">
                           </td>
                         </tr>
 
@@ -353,7 +355,7 @@
                           <td>Claridad en el proceso de desarrollo</td>
                           <td>10 puntos</td>
                           <td>
-                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[4]" id="textfield4" onkeypress="return validarNumeros(event)">
+                              <input type="text" class="persistent form-control" style ="width:45px;height:45px;" name="text[4]" id="textfield4" onkeypress="return validarNumeros(event)">
                           </td>
                         </tr>
                         <tr>
@@ -361,7 +363,7 @@
                           <td>Plazo de Ejecuci&oacute;n</td>
                           <td>10 puntos</td>
                           <td>
-                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[5]" id="textfield5" onkeypress="return validarNumeros(event)">
+                              <input type="text" class="persistent form-control" style ="width:45px;height:45px;" name="text[5]" id="textfield5" onkeypress="return validarNumeros(event)">
                           </td>
                         </tr>
                         <tr>
@@ -369,7 +371,7 @@
                           <td>Precio total</td>
                           <td>15 puntos</td>
                           <td>
-                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[6]" id="textfield6" onkeypress="return validarNumeros(event)">
+                              <input type="text" class="persistent form-control" style ="width:45px;height:45px;" name="text[6]" id="textfield6" onkeypress="return validarNumeros(event)">
                           </td>
                         </tr>
                         <tr>
@@ -377,7 +379,7 @@
                           <td>Uso de herramientas en el proceso de desarrollo</td>
                           <td>10 puntos</td>
                           <td>
-                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[7]" id="textfield7" onkeypress="return validarNumeros(event)">
+                              <input type="text" class="persistent form-control" style ="width:45px;height:45px;" name="text[7]" id="textfield7" onkeypress="return validarNumeros(event)">
                           </td>
                         </tr>
 
@@ -392,7 +394,7 @@
                       <div class="form-group">
                         <label class="col-xs-2 control-label">Fecha de la reuni&oacute;n:</label>
                         <div class="col-sm-1">
-                        <input class="form-control" style="width:500px;heigth:30px;" name="fecha" id="fecha"  >
+                        <input class="persistent form-control" style="width:500px;heigth:30px;" name="fecha" id="fecha"  >
                         </div>
       
                     </div><!--end/fecha-->
@@ -400,7 +402,7 @@
                      <div class="form-group">
                         <label class="col-xs-2 control-label">Hora de la reuni&oacute;n:</label>
                         <div class="col-sm-1" >
-                        <input class="form-control" style="width:500px;heigth:30px;"  name="hora" id="hora"  placeholder="HH:MM" readonly="readonly">
+                        <input class="persistent form-control" style="width:500px;heigth:30px;"  name="hora" id="hora"  placeholder="HH:MM" readonly="readonly">
                     </div>
       
                     </div><!--end/fecha-->
@@ -408,7 +410,7 @@
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Lugar de la reuni&oacute;n:</label>
                         <div class="col-sm-2" >
-                        <input class="form-control" style="width:500px;heigth:30px;"  name="lugar">
+                        <input class="persistent form-control" style="width:500px;heigth:30px;"  name="lugar">
                       </div>
                         
                     </div><!--end/lugar-->

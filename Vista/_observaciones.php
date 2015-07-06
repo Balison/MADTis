@@ -48,7 +48,7 @@ HTML;
 		echo <<< HTML
 		<div class="form-group doc-obs" id = "obs-$doc">
 		    <label class="col-sm-2 control-label obs">Observaciones del documento $docName</label>
-		     <a onclick="addObs('$doc')" class="link-dos" > Agregar Observacion&nbsp;&nbsp;</a><span class="glyphicon glyphicon-plus"></span>
+		     <a onclick="addObs('$doc', 'true')" class="link-dos" > Agregar Observacion&nbsp;&nbsp;</a><span class="glyphicon glyphicon-plus"></span>
 		     
 		     <div id = "obs-$doc-block" style="height: 200px;width:600px;overflow: scroll">
 		     </div>

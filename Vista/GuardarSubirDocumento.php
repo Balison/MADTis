@@ -1,6 +1,7 @@
 <?php
 
 include '../Modelo/conexion.php';
+$oldmask = umask(0);
 $UsuarioActivo = $_POST['Usuario'];
 $DocumentoR = $_POST['Documento'];
 
@@ -9,7 +10,6 @@ $clas = new conexion();
 
     if(!file_exists($rutaDirectorio))
     {
-	$oldmask = umask(0);
         mkdir($rutaDirectorio, 0777);
 
         if(!file_exists("../Repositorio/".$UsuarioActivo."/index.html"))
@@ -17,7 +17,6 @@ $clas = new conexion();
             $directorioIndex = "../Repositorio/".$UsuarioActivo."/index.html";
             fopen($directorioIndex, "x");
         }
-	umask($oldmask);
     }
     
     $ruta = "$rutaDirectorio/" . $_FILES['archivoA']['name'];
@@ -56,5 +55,6 @@ $clas->cerrarConexion();
     
    
 
+umask($oldmask);
 
 ?>
