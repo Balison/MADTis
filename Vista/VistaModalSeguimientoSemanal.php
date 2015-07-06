@@ -1,99 +1,225 @@
 <?php
-    require_once '../Modelo/Model/Planificacion.php';
-    require_once '../Modelo/Model/Entregable.php';
-    require_once '../Modelo/Model/Registro.php';
-    require_once '../Modelo/Model/Precio.php';
-    require_once '../Modelo/Model/FechaRealizacion.php';
-    require_once '../Modelo/Model/Reporte.php';
+require_once '../Modelo/Model/Planificacion.php';
+require_once '../Modelo/Model/Entregable.php';
+require_once '../Modelo/Model/Registro.php';
+require_once '../Modelo/Model/Precio.php';
+require_once '../Modelo/Model/FechaRealizacion.php';
+require_once '../Modelo/Model/Reporte.php';
 
-    $funcion = $_POST['funcion'];
-    $u = $_POST['usuario'];
+$funcion = $_POST['funcion'];
+$u = $_POST['usuario'];
+$rr = Reporte::listaRolesReporte();
+switch ($funcion){
+    case 'registrar reportes':
+        $conexion = new Conexion();
+        $conexion->conectar();
+        $format='Y-m-d';
+        $today = date($format);
+        
 
-    switch ($funcion) {
-        case 'registrar asistencia':
-          $conexion = new Conexion();
-      $conexion->conectar();
-
-      $s = $conexion->consultarTabla("SELECT codigo_s, nombres_s, apellidos_s
-                          FROM socio
-                          WHERE nombre_u = '$u';");
-      $conexion->cerrarConexion();
-      $filas = '';
-      $scripts = '';
-      for ($i = 0; $i < count($s); $i++) {
-            $filas .= '<tr data-codigo="'.$s[$i][0].'" data-nombre="'.$s[$i][1].' '.$s[$i][2].'">
-                   <td class="col-md-4">'.$s[$i][0].'</td>
-                 <td class="col-md-4">'.$s[$i][1].' </br>'.$s[$i][2].'</td>
-                     <td class="col-md-4">
-                             <div class="form-group">
-                                 <div class="radio">
-                                     <label><input type="radio" name="Asistencia'.$s[$i][0].'" value="presente" checked/> presente</label>
-                                 </div>
-                                 <div class="radio">
-                                      <label><input type="radio" name="Asistencia'.$s[$i][0].'" value="ausente" /> ausente</label>
-                                 </div>
-                                 <div class="radio">
-                                      <label><input type="radio" name="Asistencia'.$s[$i][0].'" value="licencia" /> licencia</label>
-                                 </div>
-                             </div>
-                         </td>
-               </tr>';
-
-        $scripts .= '<script>
-                   $("#registroAsistencia").find("form")
-                        .bootstrapValidator("addField", "Asistencia'.$s[$i][0].'", {
-                            validators: {
-                                notEmpty: {
-                                    message: "Seleccione una opcion"
-                                } 
-                            }
-                        });
-                  $("#registroAsistencia").find("form")
-                        .find("[name='."'".'Asistencia'.$s[$i][0]."'".']")
-                            .iCheck({
-                                checkboxClass: "icheckbox_square-green",
-                                radioClass: "iradio_square-green"
-                            })
-                            .on("ifChanged", function(e) {
-                                var field = $(this).attr("name");
-                                $("#registroAsistencia").find("form")
-                                    .bootstrapValidator("updateStatus", field, "NOT_VALIDATED")
-                                      .bootstrapValidator("validateField", field);
-                            });
-                  </script>';
+        $rolesReporte = '<div class="container">';
+        for($i =0;$i<count($rr);$i++){
+            $rolesReporte .='<input type="radio" name="roles" value="'.$rr[$i].'">';
+            $rolesReporte .='<label for = '.$rr[$i].'>';
+            $rolesReporte .=''.$rr[$i].'</label><br>';
         }
-        echo '<div class="container-fluid">
-            <div id="registroAsistencia" data-grupoe="'.$u.'">
-                  <form class="form-horizontal"> 
-                            <legend>Registro de asistencia</legend>
-                            <table class="table table-bordered table-responsive table-highlight">
-                              <thead>
-                                    <tr>
-                                        <th>Codigo</th>
-                                        <th>Socio</th>
-                                        <th>Asistencia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>'
-                                    .$filas.
-                               '</tbody>
-                        </table> 
-                  <div class="form-group">
-                                  <div class="col-md-12">
-                                    <div class="col-md-4 pull-right">
-                                      <button type="submit" class="btn btn-primary btn-block pull-right">Registrar reportes</button>
-                                    </div>
-                                  </div>
-                                </div>
-                    </form>
+        $rolesReporte .='</div>';
+        ?>
+        <div class="container">    
+            <div id="registrarActividad">
+                <fieldset><legend>Registro de las actividades, <?php echo $u; ?></legend></fieldset>
+                <div class="bs-callout bs-callout-info">
+                    <h4>Nota</h4>
+                    <p>
+                        Elija un rol y escriba las actividades a realizarse...
+                    </p>
                 </div>
+                <div class="col-md-6">
+                    
+                        <div class="col-md-4">
+                              <label>Rol</label><br/>
+
+                            <?php echo $rolesReporte; ?>                                     
+                        </div>
+                        <div class="col-md-8">
+                              <label>Actividad</label><br/>
+                              <textarea class="form-control" rows="3" name="act" id="act" maxlength="100"></textarea>
+                              <input id = "funcion" type="hidden" name="funcion" value="setActividad">
+                              <input id = "grupoE" type="hidden" name="grupoE" value="<?php echo $u; ?>">
+                              <br/>
+                              <div class="col-md-12">
+                                  <button onclick="setActividad()" id="submit" class="btn btn-primary">Agregar</button>
+                              </div>                      
+                        </div>
+                    
+                </div>
+                <div id="getActividad" class="col-md-6">
+                    <label>Actividades programadas</label><br/>
+                    <?php
+                      $seguimientos=$conexion->consulta("SELECT `ID_S`, `ROL_S`,`ACTIVIDAD_S` FROM seguimiento WHERE seguimiento.GRUPO_S='$u' AND FECHA_S ='$today'");
+                      $numLines=  mysql_num_rows($seguimientos);
+                      if($numLines==0){
+                          echo 'No hay actividades programadas para la fecha.';
+                      }
+                      else{
+                    ?>
+                    <table class="table table-striped col-md-12">
+                        <thead>
+                            <tr>
+                                <th class="col-md-3">Rol</th>
+                                <th class="col-md-6">Actividad</th>
+                                <th class="col-md-3">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while($seg =  mysql_fetch_array($seguimientos)){
+                                $id=$seg[0];
+                                $rolGE=$seg[1];
+                                $actividad=$seg[2];                                
+                                echo "<tr>";
+                                echo '<td>'.$rolGE.'</td>';
+                                echo '<td>'.$actividad.'</td>';
+                                echo '<td><button onclick="delActividad('.$id.')" class="btn btn-xs btn-danger btnBorrarReporte"><i class="fa fa-times"></i></button></td>';
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
+                      }
+                    
+                    echo '<div class="col-md-12">
+                        <button onclick="ejecutarSeguimiento()" type="button" class="btn btn-primary"'; 
+                            if($numLines==0){
+                                echo 'disabled="disabled"';
+                            }
+                                ?> 
+                                >Ejecutar Seguimiento</button>
+                    </div>
+                </div>           
+                
             </div>
-                <script>registrarAsistenciaSemanal()</script>                        
-            '.$scripts;
-      break;
+        </div>
+        
+        <?php
+        break;
+    case 'ejecutar seguimiento':
+        $conexion = new Conexion();
+        $conexion->conectar();
+        $format='Y-m-d';
+        $today = date($format);
+        $actEjecutados=$conexion->consulta("SELECT `ROL_S`,`ACTIVIDAD_S`,`RESULTADO_S`,`CONCLUSION_S`,`OBSERVACION_S` FROM seguimiento  WHERE seguimiento.GRUPO_S='$u' AND FECHA_S ='$today' AND HECHO_S=1");
+        $ejecutarAct=$conexion->consulta("SELECT `ROL_S`,`ACTIVIDAD_S`,`RESULTADO_S`,`CONCLUSION_S`,`OBSERVACION_S`, `ID_S`  FROM seguimiento  WHERE seguimiento.GRUPO_S='$u' AND FECHA_S ='$today' AND HECHO_S=0");
+        $numEjecutados=  mysql_num_rows($actEjecutados);
+        $numEjecutar=  mysql_num_rows($ejecutarAct);
+        ?>
+<div class="container">
+    <div id="ejecutaractividad">
+        <?php
+        if($numEjecutados>0 || $numEjecutar>0){
+        ?>
+        <fieldset><legend>Ejecucion de las actividades programadas</legend></fieldset>
+        <!-- Aca se muestra las actividades ya ejecutadas -->
+        <?php
+        }
+        if($numEjecutados>0){
+        ?>
+        <h4>Actividades ejecutadas</h4>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td class="col-md-1">Rol</td>
+                        <td class="col-md-2">Actividad</td>
+                        <td class="col-md-3">Resultado</td>
+                        <td class="col-md-3">Conclusion</td>
+                        <td class="col-md-3">Observacion</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    while($ejecutados =  mysql_fetch_array($actEjecutados)){
+                        $rol=$ejecutados[0];
+                        $act=$ejecutados[1];
+                        $res=$ejecutados[2];
+                        $con=$ejecutados[3];
+                        $obs=$ejecutados[4];
+                        echo '<tr>';
+                        echo '<td>'.$rol.'</td>';
+                        echo '<td>'.$act.'</td>';
+                        echo '<td>'.$res.'</td>';
+                        echo '<td>'.$con.'</td>';
+                        echo '<td>'.$obs.'</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <?php
+        }
+        if($numEjecutar >0){
+        ?>
+        <h4>Ejecutar actividades</h4>
 
-
-      case 'registrar seguimiento':
+        <div class="col-md-12">
+            
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td class="col-md-1">Rol</td>
+                        <td class="col-md-3">Actividad</td>
+                        <td class="col-md-2">Resultado</td>
+                        <td class="col-md-2">Conclusion</td>
+                        <td class="col-md-2">Observacion</td>
+                        <td class="col-md-2">Acciones</td>
+                    </tr>
+                </thead>
+            
+        
+                    <?php
+                    while($ejecutar =  mysql_fetch_array($ejecutarAct)){
+                        $rol=$ejecutar[0];
+                        $act=$ejecutar[1];
+                        $res=$ejecutar[2];
+                        $con=$ejecutar[3];
+                        $obs=$ejecutar[4];
+                        $id=$ejecutar[5];
+                        ?>
+                
+                    <input type="hidden" id="idS" value="<?php echo $id ?>">
+                    
+                    <input type="hidden" id="grupoE" value="<?php echo $u ?>">
+                    <?php
+                        echo '<tr>';
+                        echo '<td>'.$rol.'</td>';
+                        echo '<td>'.$act.'</td>';
+                        echo '<td><textarea class="form-control" rows="3" id="resultado'.$id.'"></textarea></td>';
+                        echo '<td><textarea class="form-control" rows="3" id="conclusion'.$id.'"></textarea></td>';
+                        echo '<td><textarea class="form-control" rows="3" id="observacion'.$id.'"></textarea></td>';
+                        echo '<td><button onclick="updActividad('.$id.')" type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok-sign"></span></button></td>';
+                        echo '</tr>';
+                        ?>
+                    
+                    <?php
+                    }
+                    ?>                
+            
+                
+            </table>
+            
+        </div>
+        <?php
+        }
+        ?>
+    </div>
+</div>
+        <?php
+        break;
+        
+        
+        case 'registrar seguimiento':
       $conexion = new Conexion();
       $conexion->conectar();
       $fechas=$conexion->consulta("SELECT DISTINCT `FECHA_S` FROM seguimiento WHERE seguimiento.GRUPO_S='$u' ORDER BY FECHA_S DESC ");
@@ -205,84 +331,100 @@
       
 
       break;
+}
 
-    case 'registrar reportes':
-
-      $rr = Reporte::listaRolesReporte();
-
-            $rolesReporte = '<select class="btn-primary" name="roles" multiple="multiple">';
-            for ($i = 0; $i < count($rr); $i++) { 
-                $rolesReporte .= '<option value="'.$rr[$i].'">'.$rr[$i].'</option>';
-            }
-            $rolesReporte .= '</select>';
-
-      echo '<div class="container-fluid">
-            <div id="registroRol">
-                          <legend>Registro del rol y las actividades</legend>
-                          <div class="bs-callout bs-callout-info">
-                              <h4>Nota</h4>
-                              <p>
-                                  Elija un rol y escriba las actividades a realizarse...
-                              </p>
-                          </div>
-                          <form class="form-horizontal"> 
-                              <div class="form-group">
-                                  <label class="col-md-1 control-label">Rol</label>
-                                  <div class="col-md-3">
-                                      '.$rolesReporte.'                                     
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <div class="col-md-offset-1 col-md-3 ">
-                                    <div class="col-md-6">
-                                        <button id="btnCancelarRol" class="btn btn-primary btn-block" style="display: none;">Cancelar</button>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <button type="submit" class="btn btn-primary btn-block">Agregar</button>
-                                    </div>
-                                  </div>            
-                              </div>
-                          </form>
-            </div>
-            <div id="registroReportes" style="display: none;" data-grupoe="'.$u.'">
-                          <form class="form-horizontal"> 
-                            <legend>Registro de reportes</legend>
-                            <div class="bs-callout bs-callout-warning">
-                                <h4>Nota</h4>
-                                <p>
-                                    Revise los reportes agregados antes de registrarlos...
-                                </p>
-                            </div>
-                            <table class="table table-bordered table-responsive table-highlight">
-                              <thead>
-                                    <tr>
-                                        <th>Rol</th>
-                                        <th>Actividades</th>
-                                        <th>Hecho</th>
-                                        <th>Resultados</th>
-                                        <th>Conclusiones</th>
-                                        <th>Observaciones</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                </tbody>
-                            </table> 
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                  <div class="col-md-2 pull-left">
-                                    <button type="button" id="btnAgregarRol" class="btn btn-primary btn-block">Agregar rol</button>
-                                  </div>
-                                  <div class="col-md-2 pull-right">
-                                    <button type="submit" class="btn btn-primary btn-block">Registrar reportes</button>
-                                  </div>
-                                </div>
-                              </div>
-                        </form>                        
-                      </div>
-                  </div>
-                  <script>registrarReportesSemanal()</script>';
-      break;
-    }
-    
+//funciones a los eventos onclick
 ?>
+<script>
+function setActividad(){
+    var list=$("#getActividad");
+    console.log($("#act").val());
+    console.log($("input[name='roles']:checked").val());
+    if($("input[name='roles']:checked").val() !== '' && $("#act").val() !== '' && 
+            $("input[name='roles']:checked").val() !== undefined){
+    $.ajax({
+        type: 'POST',
+        url: "/Controlador/RegistrarSeguimientoSemanal.php",
+        cache: false,
+        dataType: 'html',
+        data: {
+            act: $("#act").val(),
+            rol: $("input[name='roles']:checked").val(),
+            funcion: $("#funcion").val(),
+            grupoE: $("#grupoE").val()
+        }
+    }).done(function(res) {
+        list.empty();
+        //console.log(res);
+        list.append(res);
+    });
+    $("#act").val("");
+    }
+    else
+        alert("campos requeridos");
+}
+function updActividad(id){
+    var c=$("#ejecutaractividad");
+    console.log(id);
+    console.log($("#resultado"+id).val());
+    console.log($("#conclusion"+id).val());
+    console.log($("#observacion"+id).val());
+    //console.log($("#funcion").val());
+    console.log($("#grupoE").val());
+    $.ajax({
+        type: 'POST',
+        dataType: 'html',
+        url: "/Controlador/RegistrarSeguimientoSemanal.php",
+        cache: false,
+        data: {
+            idS:id,
+            funcion:'updateActividad',
+            grupoE:$("#grupoE").val(),
+            resultado:$("#resultado"+id).val(),
+            conclusion:$("#conclusion"+id).val(),
+            observacion:$("#observacion"+id).val()
+        }
+    }).done(function (res){
+        c.empty();
+        c.append(res);
+    });
+}
+function delActividad(id){
+    var list=$("#getActividad");
+        $.ajax({
+        type: 'POST',
+        dataType: 'html',
+        url: "/Controlador/RegistrarSeguimientoSemanal.php",
+        cache: false,
+        data:{
+            idS:id,
+            grupoE:$("#grupoE").val(),
+            funcion:'deleteActividad'
+        }
+    }).done(function (res){
+        list.empty();
+        list.append(res);
+    });
+}
+function  ejecutarSeguimiento(){
+    var u = $("#grupoE").val();
+    var funcion='ejecutar seguimiento';
+    $.ajax({
+        type:'POST',
+        dataType: 'html',
+        url: "VistaModalSeguimientoSemanal.php",
+        cache: false,
+        data:{
+            usuario: u,
+            funcion: funcion
+        }
+    }).done(function(res){
+        
+        $('.modalRegistroReportes').find('.modal-body').load('VistaModalSeguimientoSemanal.php', {
+            funcion:funcion,
+            usuario:u
+        });
+        $('.modalRegistroReportes').modal('show');
+    });
+}
+</script>

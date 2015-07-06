@@ -405,3 +405,5 @@ function registrarReportesSemanal() {
         $('#registroReportes').find('form').children().not('table, legend').hide();
     });
 }
+
+//funciones para el registro de actividades
