@@ -5,6 +5,7 @@
     require_once '../Modelo/Model/Precio.php';
     require_once '../Modelo/Model/FechaRealizacion.php';
     require_once '../Modelo/conexion.php';
+    require_once("../Controlador/documentRetriever.php");
     session_start();
         
     $uActivo = $_SESSION['usuario'];
@@ -35,13 +36,15 @@
     $OC = mysql_num_rows($Sel_OC);
     if(is_array($Inscrip))
     {
-      $consDoc = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$uActivo' AND NOMBRE_R = 'Correccion'");
+        
+        $correcReq = $con->consulta("SELECT registro.ID_R FROM registro, correccion_r WHERE correccion_r.ID_R = registro.ID_R AND correccion_r.GRUPO_EMPRESA = '$uActivo'");
+        $correcSubida = true;
+        while ($rowDocs = mysql_fetch_row($correcReq) && $correcSubida)
+        {
+            $correcSubida = alreadyUploadedCorrections($rowDocs[0], $con);
+        }
 
-      $verifDoc = mysql_fetch_row($consDoc);
-      
-      $correccionesSubidas = is_array($verifDoc);
-
-      if($NC >= 1 or ($OC>=1 and $correccionesSubidas))
+      if($NC >= 1 or ($OC>=1 and $correcSubida))
       {
         $Planif = new Planificacion($usuario);
         $estado = $Planif->getEstado();

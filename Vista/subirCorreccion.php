@@ -16,7 +16,7 @@
                         $selAsesor = $conexion->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
                         $Asesor = mysql_fetch_row($selAsesor);
 
-                        date_default_timezone_set('America/Puerto_Rico');
+                        date_default_timezone_set('America/La_Paz');
                         $horaAct = date("H:i:s");
                         $fechaAct = date('Y-m-j');
                               
