@@ -20,7 +20,7 @@
 
 	    function constructor($id) {
 	        $this->conexion->conectar();
-			$datosFechaRealizacion = $this->conexion->consulta("SELECT ID_R, FECHA_FR FROM fecha_realizacion WHERE ID_R = $id;");
+			$datosFechaRealizacion = $this->conexion->consultarTabla("SELECT ID_R, FECHA_FR FROM fecha_realizacion WHERE ID_R = $id;");
             $this->idRegistro = $datosFechaRealizacion[0][0];
             $this->fecha = $datosFechaRealizacion[0][1];
 	        $this->conexion->cerrarConexion();
