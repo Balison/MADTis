@@ -55,6 +55,8 @@ $con = new conexion();
         <script type="text/javascript" src="../Librerias/lib/validator/porcentajeAc.js"></script>
         <!-- JS -->
         <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
+        
+        <script type="text/javascript" src="../Librerias/lib/funcionSeguimiento.js"></script>
 
 
 
